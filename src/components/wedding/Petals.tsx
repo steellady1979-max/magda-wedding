@@ -3,6 +3,9 @@ import { useMemo } from "react";
 type PetalsProps = {
   count?: number;
   className?: string;
+  /** soft pink rain for the whole page */
+  rose?: boolean;
+  fixed?: boolean;
 };
 
 const PALETTE = [
@@ -12,7 +15,16 @@ const PALETTE = [
   "oklch(0.97 0.02 40 / 0.9)",
 ];
 
-export function Petals({ count = 18, className = "" }: PetalsProps) {
+const ROSE_PALETTE = [
+  "oklch(0.93 0.045 18 / 0.85)",
+  "oklch(0.95 0.03 12 / 0.8)",
+  "oklch(0.9 0.055 22 / 0.8)",
+  "oklch(0.96 0.022 30 / 0.85)",
+];
+
+export function Petals({ count = 18, className = "", rose = false, fixed = false }: PetalsProps) {
+  const colors = rose ? ROSE_PALETTE : PALETTE;
+
   const petals = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => {
@@ -26,18 +38,21 @@ export function Petals({ count = 18, className = "" }: PetalsProps) {
           delay: `${-(r2 * 18).toFixed(2)}s`,
           drift: `${(r2 - 0.5) * 220}px`,
           spin: `${180 + r * 520}deg`,
-          color: PALETTE[i % PALETTE.length],
-          opacity: 0.35 + r2 * 0.45,
+          color: colors[i % colors.length],
+          opacity: (rose ? 0.22 : 0.35) + r2 * (rose ? 0.3 : 0.45),
         };
       }),
-    [count],
+    [count, colors, rose],
   );
 
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      className={`pointer-events-none inset-0 overflow-hidden ${
+        fixed ? "fixed z-30" : "absolute"
+      } ${className}`}
     >
+
       {petals.map((p, i) => (
         <span
           key={i}
