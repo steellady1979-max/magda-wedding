@@ -18,12 +18,14 @@ function diff(target: number) {
 
 export function Countdown({ target, labels, geo }: CountdownProps) {
   const targetMs = new Date(target).getTime();
-  const [time, setTime] = useState(() => diff(targetMs));
+  const [time, setTime] = useState<ReturnType<typeof diff> | null>(null);
 
   useEffect(() => {
+    setTime(diff(targetMs));
     const id = setInterval(() => setTime(diff(targetMs)), 1000);
     return () => clearInterval(id);
   }, [targetMs]);
+
 
   const cells = [
     [time.days, labels.days],
