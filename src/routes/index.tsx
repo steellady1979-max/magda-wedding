@@ -29,6 +29,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [opened, setOpened] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  const [gone, setGone] = useState(false);
   const [muted, setMuted] = useState(true);
 
   // Gentle automatic opening if the guest doesn't tap
@@ -40,14 +41,18 @@ function Index() {
 
   useEffect(() => {
     if (!opened) return;
-    const t = setTimeout(() => setRevealed(true), 1900);
-    return () => clearTimeout(t);
+    const reveal = setTimeout(() => setRevealed(true), 1700);
+    const clear = setTimeout(() => setGone(true), 2200);
+    return () => {
+      clearTimeout(reveal);
+      clearTimeout(clear);
+    };
   }, [opened]);
 
   return (
     <main className="relative h-[100svh] w-full overflow-hidden bg-background">
       <InvitationStage revealed={revealed} />
-      <EnvelopeIntro opened={opened} onOpen={() => setOpened(true)} />
+      <EnvelopeIntro opened={opened} gone={gone} onOpen={() => setOpened(true)} />
       <SoundToggle muted={muted} onToggle={() => setMuted((m) => !m)} />
     </main>
   );

@@ -38,21 +38,21 @@ export function EnvelopeIntro({ opened, gone, onOpen }: EnvelopeIntroProps) {
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_35%,oklch(0.72_0.04_245_/_0.28)_100%)]" />
       </motion.div>
 
-      {/* Lace trim draped in a V across the top */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[46%]">
+      {/* Lace trim draped in a V that meets above the seal */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[25]">
         <img
           src={lace}
           alt=""
           width={1536}
           height={512}
-          className="absolute left-[-14%] top-[14%] w-[74%] origin-left rotate-[26deg] opacity-95 mix-blend-multiply"
+          className="absolute left-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90 mix-blend-multiply"
         />
         <img
           src={lace}
           alt=""
           width={1536}
           height={512}
-          className="absolute right-[-14%] top-[14%] w-[74%] origin-right -rotate-[26deg] -scale-x-100 opacity-95 mix-blend-multiply"
+          className="absolute right-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-left translate-x-full -rotate-[30deg] -scale-x-100 opacity-90 mix-blend-multiply"
         />
       </div>
 
