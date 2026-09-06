@@ -36,7 +36,7 @@ function Index() {
     <main className="relative h-[100svh] w-full overflow-hidden bg-white">
       <EnvelopeIntro
         opened={opened}
-        gone={gone}
+        gone={false}
         onOpen={() => setOpened(true)}
       />
     </main>
