@@ -47,14 +47,17 @@ export function EnvelopeIntro({ opened, gone, onOpen }: EnvelopeIntroProps) {
           height={512}
           className="absolute left-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90 mix-blend-multiply"
         />
-        <img
-          src={lace}
-          alt=""
-          width={1536}
-          height={512}
-          className="absolute right-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-left translate-x-full -rotate-[30deg] -scale-x-100 opacity-90 mix-blend-multiply"
-        />
+        <div className="absolute inset-0 -scale-x-100">
+          <img
+            src={lace}
+            alt=""
+            width={1536}
+            height={512}
+            className="absolute left-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90 mix-blend-multiply"
+          />
+        </div>
       </div>
+
 
       {/* Envelope flap that lifts open */}
       <motion.div
