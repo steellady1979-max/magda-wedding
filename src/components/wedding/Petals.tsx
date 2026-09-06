@@ -3,6 +3,9 @@ import { useMemo } from "react";
 type PetalsProps = {
   count?: number;
   className?: string;
+  /** soft pink rain for the whole page */
+  rose?: boolean;
+  fixed?: boolean;
 };
 
 const PALETTE = [
@@ -12,7 +15,16 @@ const PALETTE = [
   "oklch(0.97 0.02 40 / 0.9)",
 ];
 
-export function Petals({ count = 18, className = "" }: PetalsProps) {
+const ROSE_PALETTE = [
+  "oklch(0.93 0.045 18 / 0.85)",
+  "oklch(0.95 0.03 12 / 0.8)",
+  "oklch(0.9 0.055 22 / 0.8)",
+  "oklch(0.96 0.022 30 / 0.85)",
+];
+
+export function Petals({ count = 18, className = "", rose = false, fixed = false }: PetalsProps) {
+  const colors = rose ? ROSE_PALETTE : PALETTE;
+
   const petals = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => {
