@@ -28,11 +28,12 @@ export function Countdown({ target, labels, geo }: CountdownProps) {
 
 
   const cells = [
-    [time.days, labels.days],
-    [time.hours, labels.hours],
-    [time.minutes, labels.minutes],
-    [time.seconds, labels.seconds],
+    [time?.days ?? 0, labels.days],
+    [time?.hours ?? 0, labels.hours],
+    [time?.minutes ?? 0, labels.minutes],
+    [time?.seconds ?? 0, labels.seconds],
   ] as const;
+
 
   return (
     <div className="flex items-stretch justify-center gap-2 sm:gap-4">
