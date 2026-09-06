@@ -38,18 +38,21 @@ export function Petals({ count = 18, className = "", rose = false, fixed = false
           delay: `${-(r2 * 18).toFixed(2)}s`,
           drift: `${(r2 - 0.5) * 220}px`,
           spin: `${180 + r * 520}deg`,
-          color: PALETTE[i % PALETTE.length],
-          opacity: 0.35 + r2 * 0.45,
+          color: colors[i % colors.length],
+          opacity: (rose ? 0.22 : 0.35) + r2 * (rose ? 0.3 : 0.45),
         };
       }),
-    [count],
+    [count, colors, rose],
   );
 
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      className={`pointer-events-none inset-0 overflow-hidden ${
+        fixed ? "fixed z-30" : "absolute"
+      } ${className}`}
     >
+
       {petals.map((p, i) => (
         <span
           key={i}
