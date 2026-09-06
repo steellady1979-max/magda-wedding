@@ -1,24 +1,59 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
+import { InvitationStage } from "@/components/wedding/InvitationStage";
+import { SoundToggle } from "@/components/wedding/SoundToggle";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Lucia & Matteo — 27 July 2027, Château de la Couronne" },
+      {
+        name: "description",
+        content:
+          "The wedding of Lucia & Matteo, 27 July 2027 at Château de la Couronne, Nouvelle-Aquitaine, France. Open the sealed invitation.",
+      },
+      { property: "og:title", content: "The Wedding of Lucia & Matteo" },
+      {
+        property: "og:description",
+        content:
+          "27 July 2027 · Château de la Couronne, Nouvelle-Aquitaine, France. Open the sealed invitation.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [opened, setOpened] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const [gone, setGone] = useState(false);
+  const [muted, setMuted] = useState(true);
+
+  // Gentle automatic opening if the guest doesn't tap
+  useEffect(() => {
+    if (opened) return;
+    const t = setTimeout(() => setOpened(true), 5200);
+    return () => clearTimeout(t);
+  }, [opened]);
+
+  useEffect(() => {
+    if (!opened) return;
+    const reveal = setTimeout(() => setRevealed(true), 1700);
+    const clear = setTimeout(() => setGone(true), 2200);
+    return () => {
+      clearTimeout(reveal);
+      clearTimeout(clear);
+    };
+  }, [opened]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative h-[100svh] w-full overflow-hidden bg-background">
+      <InvitationStage revealed={revealed} />
+      <EnvelopeIntro opened={opened} gone={gone} onOpen={() => setOpened(true)} />
+      <SoundToggle muted={muted} onToggle={() => setMuted((m) => !m)} />
+    </main>
   );
 }
