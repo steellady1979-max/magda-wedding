@@ -9,6 +9,9 @@ import { Rsvp } from "@/components/wedding/Rsvp";
 import chateauAsset from "@/assets/chateau-illustration.png.asset.json";
 import { DressCode, Greeting, WhereToStay } from "@/components/wedding/InfoSections";
 import { copy, WEDDING_DATE, type Lang } from "@/lib/copy";
+import { Petals } from "@/components/wedding/Petals";
+import { Reveal } from "@/components/wedding/Reveal";
+import cameoAsset from "@/assets/cameo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +63,7 @@ function Index() {
 
   return (
     <main className="relative w-full bg-background">
+      {gone && <Petals count={26} rose fixed />}
       <section className="relative h-[100svh] w-full overflow-hidden">
         <InvitationStage revealed={revealed} t={t} lang={lang} onLang={setLang} />
         <EnvelopeIntro opened={opened} gone={gone} onOpen={() => setOpened(true)} tapLabel={t.tap} geo={geo} />
@@ -67,48 +71,74 @@ function Index() {
       </section>
 
       <div className="relative space-y-20 bg-[linear-gradient(180deg,oklch(0.985_0.006_90),oklch(0.96_0.012_240))] py-20 sm:space-y-24 sm:py-24">
-        <section className="mx-auto w-full max-w-xl px-6">
-          <h2
-            className={`mb-7 text-center text-[0.62rem] tracking-[0.28em] text-ink-soft ${
-              geo ? "font-geo" : "uppercase tracking-luxe"
-            }`}
-          >
-            {t.countdownTitle}
-          </h2>
-          <Countdown target={WEDDING_DATE} labels={t.countdown} geo={geo} />
-        </section>
+        <Reveal>
+          <section className="mx-auto w-full max-w-xl px-6">
+            <h2
+              className={`mb-7 text-center text-[0.62rem] tracking-[0.28em] text-ink-soft ${
+                geo ? "font-geo" : "uppercase tracking-luxe"
+              }`}
+            >
+              {t.countdownTitle}
+            </h2>
+            <Countdown target={WEDDING_DATE} labels={t.countdown} geo={geo} />
+          </section>
+        </Reveal>
 
-        <section className="mx-auto w-full max-w-xl px-6">
-          <img
-            src={chateauAsset.url}
-            alt="Château de la Couronne — watercolour illustration"
-            loading="lazy"
-            className="mx-auto w-full max-w-md"
+        <Reveal>
+          <section className="mx-auto w-full max-w-xl px-6">
+            <img
+              src={chateauAsset.url}
+              alt="Château de la Couronne — watercolour illustration"
+              loading="lazy"
+              className="mx-auto w-full max-w-md"
+            />
+          </section>
+        </Reveal>
+
+        <Reveal>
+          <Greeting t={t} geo={geo} />
+        </Reveal>
+
+        <Reveal>
+          <DressCode t={t} geo={geo} />
+        </Reveal>
+
+        <Reveal>
+          <WhereToStay t={t} geo={geo} />
+        </Reveal>
+
+        <Reveal>
+          <Rsvp t={t} geo={geo} />
+        </Reveal>
+
+        <Reveal>
+          <LocationMap
+            title={t.mapTitle}
+            address={t.mapAddress}
+            cta={t.mapCta}
+            geo={geo}
           />
-        </section>
+        </Reveal>
 
-        <Greeting t={t} geo={geo} />
+        <Reveal>
+          <div className="px-6 text-center">
+            <p
+              className={`text-lg text-ink-soft ${
+                geo ? "font-geo text-base" : "font-script text-xl"
+              }`}
+            >
+              {t.footer}
+            </p>
+            <img
+              src={cameoAsset.url}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="mx-auto mt-8 w-52 sm:w-64"
+            />
+          </div>
+        </Reveal>
 
-        <DressCode t={t} geo={geo} />
-
-        <WhereToStay t={t} geo={geo} />
-
-        <Rsvp t={t} geo={geo} />
-
-        <LocationMap
-          title={t.mapTitle}
-          address={t.mapAddress}
-          cta={t.mapCta}
-          geo={geo}
-        />
-
-        <p
-          className={`px-6 text-center text-lg text-ink-soft ${
-            geo ? "font-geo text-base" : "font-script text-xl"
-          }`}
-        >
-          {t.footer}
-        </p>
       </div>
     </main>
   );

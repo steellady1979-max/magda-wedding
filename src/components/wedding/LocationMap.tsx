@@ -7,7 +7,8 @@ type LocationMapProps = {
 
 const EMBED =
   "https://www.openstreetmap.org/export/embed.html?bbox=0.4174%2C45.6089%2C0.4974%2C45.6489&layer=mapnik&marker=45.6289%2C0.4574";
-const LINK = "https://www.openstreetmap.org/?mlat=45.6289&mlon=0.4574#map=14/45.6289/0.4574";
+const LINK =
+  "https://www.google.com/maps/place/Chateau+de+la+Couronne/data=!4m2!3m1!1s0x0:0x4695b758eaa86c9d?sa=X&ved=1t:2428&ictx=111";
 
 export function LocationMap({ title, address, cta, geo }: LocationMapProps) {
   return (
