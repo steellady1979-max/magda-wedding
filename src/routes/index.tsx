@@ -5,7 +5,8 @@ import { InvitationStage } from "@/components/wedding/InvitationStage";
 import { SoundToggle } from "@/components/wedding/SoundToggle";
 import { Countdown } from "@/components/wedding/Countdown";
 import { LocationMap } from "@/components/wedding/LocationMap";
-import { ScratchReveal } from "@/components/wedding/ScratchReveal";
+import { Rsvp } from "@/components/wedding/Rsvp";
+import chateauAsset from "@/assets/chateau-illustration.png.asset.json";
 import { DressCode, Greeting, WhereToStay } from "@/components/wedding/InfoSections";
 import { copy, WEDDING_DATE, type Lang } from "@/lib/copy";
 
@@ -77,18 +78,22 @@ function Index() {
           <Countdown target={WEDDING_DATE} labels={t.countdown} geo={geo} />
         </section>
 
-        <Greeting t={t} geo={geo} />
+        <section className="mx-auto w-full max-w-xl px-6">
+          <img
+            src={chateauAsset.url}
+            alt="Château de la Couronne — watercolour illustration"
+            loading="lazy"
+            className="mx-auto w-full max-w-md"
+          />
+        </section>
 
-        <ScratchReveal
-          title={t.scratchTitle}
-          hint={t.scratchHint}
-          caption={t.scratchDone}
-          geo={geo}
-        />
+        <Greeting t={t} geo={geo} />
 
         <DressCode t={t} geo={geo} />
 
         <WhereToStay t={t} geo={geo} />
+
+        <Rsvp t={t} geo={geo} />
 
         <LocationMap
           title={t.mapTitle}

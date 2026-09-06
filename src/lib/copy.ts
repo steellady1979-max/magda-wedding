@@ -2,7 +2,45 @@ export type Lang = "ka" | "fr";
 
 export const WEDDING_DATE = "2026-11-18T16:00:00+04:00";
 
-export const copy = {
+export type Copy = {
+  switchLabel: string;
+  tap: string;
+  weddingOf: string;
+  bride: string;
+  groom: string;
+  and: string;
+  date: string;
+  venue: string;
+  countdownTitle: string;
+  countdown: { days: string; hours: string; minutes: string; seconds: string };
+  greetingTitle: string;
+  greeting: string;
+  dressTitle: string;
+  dressSubtitle: string;
+  dressBody: string;
+  paletteTitle: string;
+  paletteNote: string;
+  palette: { name: string; color: string }[];
+  dressBody2: string;
+  rsvpTitle: string;
+  rsvpQuestion: string;
+  rsvpNameLabel: string;
+  rsvpYes: string;
+  rsvpNo: string;
+  rsvpSend: string;
+  rsvpThanksYes: string;
+  rsvpThanksNo: string;
+  rsvpNameError: string;
+  stayTitle: string;
+  hotelCta: string;
+  hotels: { name: string; meta: string; url: string }[];
+  mapTitle: string;
+  mapAddress: string;
+  mapCta: string;
+  footer: string;
+};
+
+export const copy: Record<Lang, Copy> = {
   ka: {
     switchLabel: "ქარ",
     tap: "შეეხეთ გასახსნელად",
@@ -22,15 +60,31 @@ export const copy = {
     greetingTitle: "მისალმება",
     greeting:
       "ძვირფასო სტუმრებო, ჩვენი დიდი ოჯახისთვის დიდი დღესასწაულია თქვენთან ერთად ამ მნიშვნელოვანი დღის აღნიშვნა. გელოდებით უდიდესი სიყვარულით.",
-    scratchTitle: "გადაფხეკეთ ჩვენი ფოტოს გამოსაჩენად",
-    scratchHint: "გადაიყოლეთ თითი ან კურსორი ვერცხლისფერ ზედაპირზე",
-    scratchDone: "ლუკასი & მარიამი",
     dressTitle: "Dress Code",
     dressSubtitle: "ოფიციალური — Black-Tie",
     dressBody:
-      "შატოში სანთლების შუქზე გასამართ საღამოს სულისკვეთებით, გთხოვთ, გამოცხადდეთ ყველაზე დახვეწილ საღამოს სამოსში. ბატონები — სმოკინგში ან მუქ ოფიციალურ კოსტიუმში; ქალბატონები — იატაკამდე საღამოს კაბებში ან ელეგანტურ კოქტეილის კაბებში.",
+      "გთხოვთ, მამაკაცებმა შეარჩიოთ სმოკინგი, მუქი კოსტიუმი და ქალბატონებმა საღამოს კაბა.",
+    paletteTitle: "პალიტრა",
+    paletteNote: "გარდა თეთრისა და სპილოს ძვლისფრისა",
+    palette: [
+      { name: "შამპანური", color: "#efe0c6" },
+      { name: "ბლაში", color: "#e8cfcb" },
+      { name: "მტვრიანი ცისფერი", color: "#c3d1e0" },
+      { name: "სალბი", color: "#c2cdb9" },
+      { name: "ქლიავი", color: "#8f6a80" },
+      { name: "შუაღამე", color: "#2f3a54" },
+    ],
     dressBody2:
-      "აირჩიეთ რბილი, რომანტიკული ტონები — შამპანურის, ბლაშის, მტვრიანი ცისფერი, სალბის, ქლიავისა და შუაღამის ფერები. გაითვალისწინეთ ბალახი და ხრეში — ფეხსაცმელი ისეთი შეარჩიეთ, რომლითაც გარიჟრაჟამდე იცეკვებთ. თეთრი და სპილოს ძვლის ფერი, გთხოვთ, პატარძლისთვის დაუტოვეთ.",
+      "P.S. საღამო იმართება ღია სივრცეში, შეარჩიეთ ბალახსა და ხრეშზე საცეკვაო ფეხსაცმელი.",
+    rsvpTitle: "დადასტურება",
+    rsvpQuestion: "შეძლებთ მობრძანებას?",
+    rsvpNameLabel: "თქვენი სახელი",
+    rsvpYes: "კი",
+    rsvpNo: "ვერა",
+    rsvpSend: "გაგზავნა",
+    rsvpThanksYes: "მადლობა! გელოდებით შატოში.",
+    rsvpThanksNo: "მადლობა, რომ შეგვატყობინეთ. ძალიან დაგვენანება.",
+    rsvpNameError: "გთხოვთ, მიუთითოთ სახელი",
     stayTitle: "სად დარჩენა",
     hotelCta: "სასტუმროს ნახვა",
     hotels: [
@@ -74,15 +128,31 @@ export const copy = {
     greetingTitle: "Bienvenue",
     greeting:
       "Chers invités, célébrer ce jour si important à vos côtés est une grande fête pour notre grande famille. Nous vous attendons avec le plus grand amour.",
-    scratchTitle: "Grattez pour découvrir notre photo",
-    scratchHint: "Glissez le doigt ou le curseur sur la surface argentée",
-    scratchDone: "Lukas & Mariam",
     dressTitle: "Dress Code",
     dressSubtitle: "Tenue de soirée — Black-Tie",
     dressBody:
-      "Dans l'esprit d'une soirée aux chandelles au château, nous vous invitons à porter votre plus belle tenue black-tie. Messieurs en smoking ou costume sombre ; mesdames en robe longue ou robe de cocktail élégante.",
+      "Messieurs, smoking ou costume sombre ; mesdames, robe de soirée.",
+    paletteTitle: "Palette",
+    paletteNote: "hors blanc et ivoire",
+    palette: [
+      { name: "Champagne", color: "#efe0c6" },
+      { name: "Blush", color: "#e8cfcb" },
+      { name: "Bleu poudré", color: "#c3d1e0" },
+      { name: "Sauge", color: "#c2cdb9" },
+      { name: "Prune", color: "#8f6a80" },
+      { name: "Minuit", color: "#2f3a54" },
+    ],
     dressBody2:
-      "Adoptez des tons doux et romantiques — champagne, blush, bleu poudré, sauge, prune et minuit — et choisissez des talons qui marchent sur l'herbe et le gravier et dansent jusqu'à l'aube. Merci de réserver l'ivoire et le blanc cassé à la mariée.",
+      "P.S. La soirée se déroule en extérieur : choisissez des chaussures pour danser sur l'herbe et le gravier.",
+    rsvpTitle: "RSVP",
+    rsvpQuestion: "Pourrez-vous être des nôtres ?",
+    rsvpNameLabel: "Votre nom",
+    rsvpYes: "Oui",
+    rsvpNo: "Non",
+    rsvpSend: "Envoyer",
+    rsvpThanksYes: "Merci ! Nous vous attendons au château.",
+    rsvpThanksNo: "Merci de nous avoir prévenus. Vous nous manquerez.",
+    rsvpNameError: "Merci d'indiquer votre nom",
     stayTitle: "Où séjourner",
     hotelCta: "Voir l'hôtel",
     hotels: [
@@ -107,6 +177,4 @@ export const copy = {
     mapCta: "Voir sur la carte",
     footer: "Nous vous attendons avec le plus grand amour",
   },
-} as const;
-
-export type Copy = (typeof copy)["ka"];
+};
