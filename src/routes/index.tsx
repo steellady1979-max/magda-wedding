@@ -25,18 +25,11 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [opened, setOpened] = useState(false);
-  const [gone, setGone] = useState(false);
 
   useEffect(() => {
     if (opened) return;
     const t = setTimeout(() => setOpened(true), 5200);
     return () => clearTimeout(t);
-  }, [opened]);
-
-  useEffect(() => {
-    if (!opened) return;
-    const clear = setTimeout(() => setGone(true), 9000);
-    return () => clearTimeout(clear);
   }, [opened]);
 
   return (
