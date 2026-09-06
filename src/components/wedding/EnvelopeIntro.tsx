@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import envelopeTexture from "@/assets/envelope-texture.jpg";
-import waxSeal from "@/assets/wax-seal.png";
+import envelopeTexture from "@/assets/envelope-texture-cream.jpg";
+import waxSeal from "@/assets/wax-seal-bm.png";
+import { PhotoFan } from "./PhotoFan";
 import lace from "@/assets/lace.png";
 
 type EnvelopeIntroProps = {
@@ -112,7 +113,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
         <span className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle,oklch(1_0_0_/_0.75),transparent_70%)] blur-xl" />
         <img
           src={waxSeal}
-          alt="Wax seal with the initials L and M"
+          alt="Wax seal with the initials B and M"
           width={1024}
           height={1024}
           className={`w-full drop-shadow-[var(--shadow-seal)] transition-transform duration-700 ${
@@ -120,6 +121,8 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
           }`}
         />
       </motion.button>
+
+      <PhotoFan show={opened} />
 
       {/* Prompt */}
       <motion.p

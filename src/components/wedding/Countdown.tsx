@@ -18,19 +18,22 @@ function diff(target: number) {
 
 export function Countdown({ target, labels, geo }: CountdownProps) {
   const targetMs = new Date(target).getTime();
-  const [time, setTime] = useState(() => diff(targetMs));
+  const [time, setTime] = useState<ReturnType<typeof diff> | null>(null);
 
   useEffect(() => {
+    setTime(diff(targetMs));
     const id = setInterval(() => setTime(diff(targetMs)), 1000);
     return () => clearInterval(id);
   }, [targetMs]);
 
+
   const cells = [
-    [time.days, labels.days],
-    [time.hours, labels.hours],
-    [time.minutes, labels.minutes],
-    [time.seconds, labels.seconds],
+    [time?.days ?? 0, labels.days],
+    [time?.hours ?? 0, labels.hours],
+    [time?.minutes ?? 0, labels.minutes],
+    [time?.seconds ?? 0, labels.seconds],
   ] as const;
+
 
   return (
     <div className="flex items-stretch justify-center gap-2 sm:gap-4">

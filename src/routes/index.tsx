@@ -53,8 +53,8 @@ function Index() {
 
   useEffect(() => {
     if (!opened) return;
-    const reveal = setTimeout(() => setRevealed(true), 1700);
-    const clear = setTimeout(() => setGone(true), 2200);
+    const reveal = setTimeout(() => setRevealed(true), 3200);
+    const clear = setTimeout(() => setGone(true), 4200);
     return () => {
       clearTimeout(reveal);
       clearTimeout(clear);
