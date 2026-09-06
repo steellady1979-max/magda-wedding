@@ -2,7 +2,45 @@ export type Lang = "ka" | "fr";
 
 export const WEDDING_DATE = "2026-11-18T16:00:00+04:00";
 
-export const copy = {
+export type Copy = {
+  switchLabel: string;
+  tap: string;
+  weddingOf: string;
+  bride: string;
+  groom: string;
+  and: string;
+  date: string;
+  venue: string;
+  countdownTitle: string;
+  countdown: { days: string; hours: string; minutes: string; seconds: string };
+  greetingTitle: string;
+  greeting: string;
+  dressTitle: string;
+  dressSubtitle: string;
+  dressBody: string;
+  paletteTitle: string;
+  paletteNote: string;
+  palette: { name: string; color: string }[];
+  dressBody2: string;
+  rsvpTitle: string;
+  rsvpQuestion: string;
+  rsvpNameLabel: string;
+  rsvpYes: string;
+  rsvpNo: string;
+  rsvpSend: string;
+  rsvpThanksYes: string;
+  rsvpThanksNo: string;
+  rsvpNameError: string;
+  stayTitle: string;
+  hotelCta: string;
+  hotels: { name: string; meta: string; url: string }[];
+  mapTitle: string;
+  mapAddress: string;
+  mapCta: string;
+  footer: string;
+};
+
+export const copy: Record<Lang, Copy> = {
   ka: {
     switchLabel: "ქარ",
     tap: "შეეხეთ გასახსნელად",
@@ -139,6 +177,4 @@ export const copy = {
     mapCta: "Voir sur la carte",
     footer: "Nous vous attendons avec le plus grand amour",
   },
-} as const;
-
-export type Copy = (typeof copy)["ka"];
+};

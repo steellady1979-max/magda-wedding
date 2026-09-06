@@ -7,11 +7,15 @@ type EnvelopeIntroProps = {
   opened: boolean;
   gone: boolean;
   onOpen: () => void;
+  tapLabel?: string;
+  geo?: boolean;
 };
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
-export function EnvelopeIntro({ opened, gone, onOpen }: EnvelopeIntroProps) {
+export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeIntroProps) {
+  void tapLabel;
+  void geo;
   return (
     <motion.div
       className="absolute inset-0 z-30 flex items-center justify-center overflow-hidden bg-background"
