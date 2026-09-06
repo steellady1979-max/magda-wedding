@@ -1,11 +1,11 @@
 {
-  "asset_id": "fc3335cf-b2d2-48aa-bb90-f5b2e4a50404",
-  "content_type": "font/ttf",
-  "created_at": "2026-09-06T11:51:00Z",
-  "original_filename": "georgian-display.ttf",
+  "version": 1,
+  "asset_id": "efa71def-9caa-453e-a8ee-d30372becadc",
   "project_id": "b17dc70b-11a1-4c64-8670-1884e28e0892",
-  "r2_key": "a/v1/b17dc70b-11a1-4c64-8670-1884e28e0892/fc3335cf-b2d2-48aa-bb90-f5b2e4a50404/georgian-display.ttf",
+  "url": "/__l5e/assets-v1/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf",
+  "r2_key": "a/v1/b17dc70b-11a1-4c64-8670-1884e28e0892/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf",
+  "original_filename": "georgian-display.ttf",
   "size": 48348,
-  "url": "/__l5e/assets-v1/fc3335cf-b2d2-48aa-bb90-f5b2e4a50404/georgian-display.ttf",
-  "version": 1
+  "content_type": "font/ttf",
+  "created_at": "2026-09-06T11:59:38Z"
 }

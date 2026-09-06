@@ -2,9 +2,13 @@ import { motion } from "motion/react";
 import castleBg from "@/assets/castle-bg.jpg";
 import curtain from "@/assets/curtain-left.png";
 import { Petals } from "./Petals";
+import type { Copy, Lang } from "@/lib/copy";
 
 type InvitationStageProps = {
   revealed: boolean;
+  t: Copy;
+  lang: Lang;
+  onLang: (l: Lang) => void;
 };
 
 const silk = [0.22, 1, 0.36, 1] as const;
@@ -15,13 +19,15 @@ const line = (delay: number) => ({
   transition: { duration: 1.4, delay, ease: silk },
 });
 
-export function InvitationStage({ revealed }: InvitationStageProps) {
+export function InvitationStage({ revealed, t, lang, onLang }: InvitationStageProps) {
+  const geo = lang === "ka";
+
   return (
     <div className="absolute inset-0 overflow-hidden bg-background">
       {/* Watercolour château backdrop */}
       <motion.img
         src={castleBg}
-        alt="Watercolour painting of Château de la Couronne with a flower-lined avenue"
+        alt="Château de la Couronne"
         width={1024}
         height={1536}
         className="absolute inset-0 h-full w-full object-cover"
@@ -66,18 +72,29 @@ export function InvitationStage({ revealed }: InvitationStageProps) {
         />
       </motion.div>
 
-
       {/* Language switch */}
       <motion.div
-        className="absolute right-4 top-4 z-40 flex overflow-hidden rounded-md border border-border/70 bg-porcelain/60 text-[0.6rem] uppercase tracking-[0.2em] text-ink backdrop-blur-md sm:right-6 sm:top-6"
+        className="absolute right-4 top-4 z-40 flex overflow-hidden rounded-md border border-border/70 bg-porcelain/60 text-[0.6rem] tracking-[0.2em] text-ink backdrop-blur-md sm:right-6 sm:top-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: revealed ? 1 : 0 }}
         transition={{ duration: 1, delay: 2.2 }}
       >
-        <button type="button" className="bg-accent/70 px-3 py-1.5">
-          EN
+        <button
+          type="button"
+          onClick={() => onLang("ka")}
+          className={`font-geo px-3 py-1.5 transition-colors ${
+            geo ? "bg-accent/70" : "text-ink-soft hover:bg-accent/40"
+          }`}
+        >
+          ქარ
         </button>
-        <button type="button" className="px-3 py-1.5 text-ink-soft transition-colors hover:bg-accent/40">
+        <button
+          type="button"
+          onClick={() => onLang("fr")}
+          className={`px-3 py-1.5 uppercase transition-colors ${
+            geo ? "text-ink-soft hover:bg-accent/40" : "bg-accent/70"
+          }`}
+        >
           FR
         </button>
       </motion.div>
@@ -87,39 +104,51 @@ export function InvitationStage({ revealed }: InvitationStageProps) {
         <div className="absolute inset-x-0 top-[10%] z-30 flex flex-col items-center px-6 text-center">
           <motion.p
             {...line(1.4)}
-            className="text-[0.6rem] uppercase tracking-luxe text-ink-soft sm:text-[0.72rem]"
+            className={`text-[0.6rem] tracking-[0.3em] text-ink-soft sm:text-[0.72rem] ${
+              geo ? "font-geo" : "uppercase tracking-luxe"
+            }`}
           >
-            The Wedding of
+            {t.weddingOf}
           </motion.p>
 
           <motion.h1
             {...line(1.8)}
-            className="mt-5 flex flex-col items-center leading-[0.92] text-ink"
+            className="mt-5 flex flex-col items-center leading-[1] text-ink"
           >
-            <span className="font-script text-[3.4rem] sm:text-7xl md:text-8xl">Lucia</span>
+            <span className={geo ? "font-geo text-[2.6rem] sm:text-6xl" : "font-script text-[3.4rem] sm:text-7xl md:text-8xl"}>
+              {t.bride}
+            </span>
             <span className="my-1 font-script text-2xl text-ink-soft sm:text-3xl">&amp;</span>
-            <span className="font-script text-[3.4rem] sm:text-7xl md:text-8xl">Matteo</span>
+            <span className={geo ? "font-geo text-[2.6rem] sm:text-6xl" : "font-script text-[3.4rem] sm:text-7xl md:text-8xl"}>
+              {t.groom}
+            </span>
           </motion.h1>
 
-          <motion.div
-            {...line(2.5)}
-            className="mt-8 flex items-center gap-3 text-ink-soft"
-          >
+          <motion.div {...line(2.5)} className="mt-8 flex items-center gap-3 text-ink-soft">
             <span className="h-px w-10 bg-current opacity-40" />
-            <span className="text-[0.7rem] uppercase tracking-[0.34em] sm:text-xs">
-              27 July 2027
+            <span className={`text-[0.7rem] tracking-[0.28em] sm:text-xs ${geo ? "font-geo" : "uppercase tracking-[0.34em]"}`}>
+              {t.date}
             </span>
             <span className="h-px w-10 bg-current opacity-40" />
           </motion.div>
 
           <motion.p
             {...line(2.9)}
-            className="mt-5 max-w-[16rem] text-balance-tight font-script text-lg leading-snug text-ink sm:max-w-sm sm:text-xl"
+            className={`mt-5 max-w-[17rem] whitespace-pre-line text-balance-tight leading-snug text-ink sm:max-w-sm ${
+              geo ? "font-geo text-base sm:text-lg" : "font-script text-lg sm:text-xl"
+            }`}
           >
-            Château de la Couronne,
-            <br />
-            Nouvelle-Aquitaine, France
+            {t.venue}
           </motion.p>
+
+          <motion.div
+            {...line(3.4)}
+            className={`mt-10 flex flex-col items-center gap-2 text-[0.58rem] tracking-[0.24em] text-ink-soft ${
+              geo ? "font-geo" : "uppercase"
+            }`}
+          >
+            <span className="h-8 w-px animate-pulse bg-current opacity-40" />
+          </motion.div>
         </div>
       )}
     </div>

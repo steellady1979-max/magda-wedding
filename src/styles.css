@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "GeorgianDisplay";
+  src: url("/__l5e/assets-v1/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 /*
  * Design system definition.
  *
@@ -60,6 +67,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-georgian: "GeorgianDisplay", "Cormorant Garamond", Georgia, serif;
   --font-body: "Cormorant Garamond", Georgia, serif;
   --font-sans-elegant: "Jost", ui-sans-serif, system-ui, sans-serif;
   --color-ink: var(--ink);
@@ -175,6 +183,11 @@
 @utility font-script {
   font-family: var(--font-display);
   font-style: italic;
+}
+
+@utility font-geo {
+  font-family: var(--font-georgian);
+  font-style: normal;
 }
 
 @utility tracking-luxe {
