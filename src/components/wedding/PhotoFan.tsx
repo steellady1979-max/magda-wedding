@@ -51,7 +51,7 @@ export function PhotoFan({ show }: PhotoFanProps) {
               />
               {/* sea band: only the water drifts */}
               <div
-                className="absolute inset-x-0 top-0 overflow-hidden"
+                className="absolute inset-x-0 top-0 overflow-hidden [mask-image:linear-gradient(180deg,black_70%,transparent)]"
                 style={{ height: f.band }}
                 aria-hidden
               >
@@ -62,11 +62,12 @@ export function PhotoFan({ show }: PhotoFanProps) {
                   className="animate-sea absolute left-0 top-0 w-full origin-top object-cover"
                   style={{ height: `calc(100% / ${parseFloat(f.band) / 100})` }}
                 />
-                {/* soft edge so the moving band blends into the static photo */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,oklch(1_0_0_/_0.02))] [mask-image:linear-gradient(180deg,transparent,black)]" />
               </div>
-              {/* hair band: gentle wind sway */}
-              <div className="absolute inset-0 overflow-hidden [mask-image:radial-gradient(60%_45%_at_58%_45%,black,transparent_75%)]" aria-hidden>
+              {/* hair: gentle wind sway over the flowing hair only */}
+              <div
+                className="absolute inset-0 overflow-hidden [mask-image:radial-gradient(42%_34%_at_66%_52%,black_35%,transparent_80%)]"
+                aria-hidden
+              >
                 <img
                   src={f.url}
                   alt=""
@@ -74,7 +75,8 @@ export function PhotoFan({ show }: PhotoFanProps) {
                   className="animate-hair absolute inset-0 h-full w-full origin-center object-cover"
                 />
               </div>
-              <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_20%,transparent_45%,oklch(0.72_0.04_245_/_0.16)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_20%,transparent_55%,oklch(0.72_0.04_245_/_0.12)_100%)]" />
+
             </div>
           </div>
         </motion.div>
