@@ -35,28 +35,37 @@ export function InvitationStage({ revealed }: InvitationStageProps) {
       <Petals count={20} />
 
       {/* Parting curtains */}
-      <motion.img
-        src={curtain}
-        alt=""
+      <motion.div
         aria-hidden
-        width={768}
-        height={1536}
-        className="pointer-events-none absolute inset-y-0 left-0 h-full w-[62%] max-w-[520px] object-cover object-left"
+        className="pointer-events-none absolute inset-y-0 left-0 w-[56%] max-w-[420px]"
         initial={{ x: "0%" }}
-        animate={{ x: revealed ? "-34%" : "0%" }}
-        transition={{ duration: 3.2, ease: silk }}
-      />
-      <motion.img
-        src={curtain}
-        alt=""
+        animate={{ x: revealed ? "-48%" : "0%" }}
+        transition={{ duration: 3.4, ease: silk }}
+      >
+        <img
+          src={curtain}
+          alt=""
+          width={768}
+          height={1536}
+          className="h-full w-full object-cover object-left"
+        />
+      </motion.div>
+      <motion.div
         aria-hidden
-        width={768}
-        height={1536}
-        className="pointer-events-none absolute inset-y-0 right-0 h-full w-[62%] max-w-[520px] -scale-x-100 object-cover object-left"
+        className="pointer-events-none absolute inset-y-0 right-0 w-[56%] max-w-[420px] -scale-x-100"
         initial={{ x: "0%" }}
-        animate={{ x: revealed ? "34%" : "0%" }}
-        transition={{ duration: 3.2, ease: silk }}
-      />
+        animate={{ x: revealed ? "-48%" : "0%" }}
+        transition={{ duration: 3.4, ease: silk }}
+      >
+        <img
+          src={curtain}
+          alt=""
+          width={768}
+          height={1536}
+          className="h-full w-full object-cover object-left"
+        />
+      </motion.div>
+
 
       {/* Language switch */}
       <motion.div
