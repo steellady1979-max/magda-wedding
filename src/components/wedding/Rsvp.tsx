@@ -34,7 +34,7 @@ export function Rsvp({ t, geo }: Props) {
 
   return (
     <section className="mx-auto w-full max-w-xl px-6 text-center">
-      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-porcelain/70 px-6 pb-10 pt-24 backdrop-blur-md sm:px-10">
+      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-porcelain/70 px-6 pb-10 pt-8 backdrop-blur-md sm:px-10">
         <img
           src={roses}
           alt=""
@@ -42,7 +42,7 @@ export function Rsvp({ t, geo }: Props) {
           loading="lazy"
           width={1024}
           height={1024}
-          className="pointer-events-none absolute -top-16 left-1/2 w-64 -translate-x-1/2 opacity-90 sm:w-72"
+          className="pointer-events-none relative mx-auto -mt-2 mb-4 w-44 sm:w-52"
         />
         <img
           src={roses}
@@ -51,7 +51,7 @@ export function Rsvp({ t, geo }: Props) {
           loading="lazy"
           width={1024}
           height={1024}
-          className="pointer-events-none absolute -bottom-24 -right-16 w-40 rotate-12 opacity-30 sm:w-52"
+          className="pointer-events-none absolute -bottom-20 -right-14 w-36 rotate-12 opacity-25 sm:w-44"
         />
 
         <div className="relative">
