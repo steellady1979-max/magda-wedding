@@ -5,19 +5,22 @@ import lace from "@/assets/lace.png";
 
 type EnvelopeIntroProps = {
   opened: boolean;
+  gone: boolean;
   onOpen: () => void;
 };
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
-export function EnvelopeIntro({ opened, onOpen }: EnvelopeIntroProps) {
+export function EnvelopeIntro({ opened, gone, onOpen }: EnvelopeIntroProps) {
   return (
     <motion.div
       className="absolute inset-0 z-30 flex items-center justify-center overflow-hidden bg-background"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: opened ? 0 : 1 }}
-      transition={{ duration: 1.1, delay: opened ? 1.5 : 0, ease: silk }}
+      initial={false}
+      animate={{ opacity: gone ? 0 : 1 }}
+      style={{ pointerEvents: gone ? "none" : "auto" }}
+      transition={{ duration: 1.2, ease: silk }}
     >
+
       {/* Envelope surface fills the viewport, as in a close-up */}
       <motion.div
         className="absolute inset-0"
