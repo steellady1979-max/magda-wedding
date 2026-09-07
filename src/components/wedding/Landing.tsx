@@ -91,24 +91,6 @@ export function Landing() {
             </a>
           </Button>
         </section>
-        <section className="wedding-section" aria-labelledby="rsvp-title">
-          <Divider />
-          <h2 id="rsvp-title">შეძლებთ მობრძანებას?</h2>
-          <iframe
-            className="wedding-google-form"
-            src={`${event.rsvpForm}?embedded=true`}
-            title="დასწრების ფორმა — ბექა და მაგდა"
-            loading="lazy"
-          />
-          <a
-            className="wedding-form-link"
-            href={event.rsvpForm}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ფორმის გახსნა ცალკე ჩანართში ↗
-          </a>
-        </section>
         <footer className="wedding-footer">
           <Divider />
           <p>გელოდებით სიყვარულით</p>
