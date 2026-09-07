@@ -1,17 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Landing } from "@/components/wedding/Landing";
+import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ლუკასი & მარიამი — 18 ნოემბერი 2026" },
+      { title: `${event.names} — ${event.date}` },
       {
         name: "description",
-        content:
-          "ლუკასი და მარიამის ქორწილის მოსაწვევი — გახსენით დაბეჭდილი კონვერტი.",
+        content: event.invitation,
       },
-      { property: "og:title", content: "ლუკასი & მარიამი — ქორწილის მოსაწვევი" },
+      { property: "og:title", content: `${event.names} — ქორწილის მოსაწვევი` },
       {
         property: "og:description",
         content: "გახსენით მოსაწვევი კონვერტი და იხილეთ ჩვენი ფოტოები.",
@@ -33,12 +34,16 @@ function Index() {
   }, [opened]);
 
   return (
-    <main className="relative h-[100svh] w-full overflow-hidden bg-white">
-      <EnvelopeIntro
-        opened={opened}
-        gone={false}
-        onOpen={() => setOpened(true)}
-      />
+    <main className="bg-white">
+      <div className="relative h-[100svh] w-full overflow-hidden">
+        <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
+        {opened && (
+          <a href="#invitation" className="envelope-continue">
+            მოსაწვევის ნახვა ↓
+          </a>
+        )}
+      </div>
+      {opened && <Landing />}
     </main>
   );
 }

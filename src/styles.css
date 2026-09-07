@@ -6,7 +6,8 @@
 
 @font-face {
   font-family: "GeorgianDisplay";
-  src: url("/__l5e/assets-v1/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf") format("truetype");
+  src: url("/__l5e/assets-v1/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf")
+    format("truetype");
   font-weight: 400;
   font-display: swap;
 }
@@ -129,7 +130,6 @@
   );
   --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 
 .dark {
   --background: oklch(0.129 0.042 264.695);
@@ -265,8 +265,6 @@
   will-change: transform;
 }
 
-
-
 @utility shimmer {
   position: relative;
   overflow: hidden;
@@ -274,12 +272,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      100deg,
-      transparent 0%,
-      oklch(1 0 0 / 0.55) 50%,
-      transparent 100%
-    );
+    background: linear-gradient(100deg, transparent 0%, oklch(1 0 0 / 0.55) 50%, transparent 100%);
     animation: shimmer-sweep 4.5s var(--ease-silk) infinite;
   }
 }
@@ -294,3 +287,301 @@
   }
 }
 
+@font-face {
+  font-family: "DavitGuramishvili";
+  src: url("/fonts/davit-guramishvili.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+html {
+  scroll-behavior: smooth;
+}
+.envelope-continue {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 12px 22px;
+  color: #3b281f;
+  background: #fffaf2;
+  border: 1px solid #d5c7b1;
+  font-family: "DavitGuramishvili", serif;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.wedding-landing {
+  padding: 45px 24px;
+  background-size: 650px auto;
+  color: #3b281f;
+  font-family: "DavitGuramishvili", Georgia, serif;
+  text-align: center;
+}
+.wedding-paper {
+  position: relative;
+  max-width: 940px;
+  margin: auto;
+  background: #fff;
+  border: 1px solid #ded2bf;
+  outline: 1px solid #e9e0d2;
+  outline-offset: -10px;
+  padding: 0 55px;
+  overflow: hidden;
+}
+.wedding-lace {
+  display: block;
+  width: calc(100% + 110px);
+  max-width: none;
+  height: 110px;
+  margin: 0 -55px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.7;
+}
+.wedding-heading {
+  padding: 50px 0 35px;
+}
+.wedding-heading h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+.event-date {
+  font-family: "DavitGuramishvili", serif;
+  font-size: 1.7rem;
+  margin: 12px 0 25px;
+}
+.wedding-intro {
+  font-size: 1.3rem;
+  line-height: 1.9;
+  max-width: 510px;
+  margin: 0 auto 28px;
+  text-wrap: balance;
+}
+.wedding-divider {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  color: #b9a583;
+  margin-bottom: 28px;
+}
+.wedding-divider span {
+  width: 48px;
+  height: 1px;
+  background: #dfd1bb;
+}
+.wedding-section {
+  padding: 50px 0;
+  scroll-margin-top: 25px;
+}
+.wedding-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+.wedding-note {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #786455;
+  margin: 14px 0 22px;
+}
+.wedding-button {
+  min-height: 48px;
+  height: auto;
+  padding: 12px 22px;
+  border: 1px solid #bda98b;
+  border-radius: 2px;
+  background: white;
+  color: #3b281f;
+  font-size: 1.05rem;
+  font-family: inherit;
+  white-space: normal;
+  box-shadow: none;
+}
+.wedding-button:hover {
+  background: #f6f0e7;
+  color: #3b281f;
+}
+.wedding-button:focus-visible,
+.envelope-continue:focus-visible {
+  outline: 2px solid #3b281f;
+  outline-offset: 4px;
+}
+.wedding-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 560px;
+  margin: 35px auto;
+}
+.wedding-countdown > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wedding-countdown > div + div {
+  border-left: 1px solid #e5dac8;
+}
+.wedding-countdown strong {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-variant-numeric: tabular-nums;
+}
+.wedding-countdown span {
+  font-size: 1rem;
+}
+.wedding-timeline {
+  list-style: none;
+  max-width: 440px;
+  padding: 0;
+  margin: 35px auto 0;
+  text-align: left;
+}
+.wedding-timeline li {
+  display: grid;
+  grid-template-columns: 70px 30px 1fr;
+  gap: 16px;
+  align-items: start;
+  position: relative;
+  min-height: 80px;
+  font-size: 1.2rem;
+}
+.wedding-timeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 100px;
+  top: 27px;
+  bottom: 0;
+  width: 1px;
+  background: #e5dac8;
+}
+.wedding-timeline time {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 30px;
+}
+.wedding-timeline span {
+  color: #bda98b;
+  text-align: center;
+}
+.wedding-timeline h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 30px;
+}
+.wedding-venue {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 12px;
+}
+.wedding-location {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 28px auto;
+}
+.wedding-rsvp {
+  max-width: 430px;
+  margin: 28px auto 0;
+  text-align: left;
+  font-size: 1.1rem;
+}
+.wedding-rsvp fieldset {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 28px;
+}
+.wedding-rsvp fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.wedding-rsvp input[type="radio"] {
+  width: 19px;
+  height: 19px;
+  accent-color: #3b281f;
+}
+.wedding-input {
+  margin: 10px 0 24px;
+  min-height: 50px;
+  border-color: #bdab90;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 1.2rem;
+}
+.wedding-rsvp > .wedding-button {
+  width: 100%;
+}
+.wedding-footer {
+  border-top: 1px solid #e5dac8;
+  padding: 48px 0 70px;
+}
+.wedding-footer p {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+.wedding-footer > span {
+  font-size: 1.1rem;
+}
+@media (max-width: 520px) {
+  .wedding-landing {
+    padding: 20px 12px;
+  }
+  .wedding-paper {
+    padding: 0 24px;
+  }
+  .wedding-lace {
+    width: calc(100% + 48px);
+    margin: 0 -24px;
+    height: 75px;
+  }
+  .wedding-heading {
+    padding-top: 35px;
+  }
+  .wedding-section {
+    padding: 35px 0;
+  }
+  .wedding-timeline li {
+    grid-template-columns: 56px 22px 1fr;
+    gap: 10px;
+  }
+  .wedding-timeline li:not(:last-child)::after {
+    left: 77px;
+  }
+  .wedding-timeline h3 {
+    font-size: 1.1rem;
+  }
+  .wedding-countdown span {
+    font-size: 0.9rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+.wedding-google-form {
+  display: block;
+  width: 100%;
+  height: 850px;
+  border: 0;
+  margin: 24px auto 12px;
+}
+.wedding-form-link {
+  display: inline-block;
+  color: #3b281f;
+  text-decoration: underline;
+  font-size: 1.1rem;
+  padding: 12px;
+}
+@media (max-width: 520px) {
+  .wedding-google-form {
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    height: 940px;
+  }
+}

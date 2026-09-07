@@ -1,11 +1,5 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import photo1 from "@/assets/couple-1.jpeg.asset.json";
-import photo2 from "@/assets/couple-2.jpeg.asset.json";
-import photo3 from "@/assets/couple-3.jpeg.asset.json";
-import video1 from "@/assets/couple-1.mp4.asset.json";
-import video2 from "@/assets/couple-2.mp4.asset.json";
-import video3 from "@/assets/couple-3.mp4.asset.json";
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
@@ -26,8 +20,8 @@ type Frame = {
 
 const frames: Frame[] = [
   {
-    url: photo1.url,
-    video: video1.url,
+    url: "/media/couple-1.jpg",
+    video: "/media/couple-1.mp4",
     rotate: -9,
     x: "-52%",
     scale: 0.82,
@@ -38,8 +32,8 @@ const frames: Frame[] = [
     floatDelay: "0s",
   },
   {
-    url: photo2.url,
-    video: video2.url,
+    url: "/media/couple-2.jpg",
+    video: "/media/couple-2.mp4",
     rotate: 9,
     x: "52%",
     scale: 0.82,
@@ -50,8 +44,8 @@ const frames: Frame[] = [
     floatDelay: "-3.2s",
   },
   {
-    url: photo3.url,
-    video: video3.url,
+    url: "/media/couple-3.jpg",
+    video: "/media/couple-3.mp4",
     rotate: 0,
     x: "0%",
     scale: 1,
@@ -76,7 +70,6 @@ export function PhotoFan({ show }: PhotoFanProps) {
     const io = new IntersectionObserver(
       (entries) => setInView(entries[0]?.isIntersecting ?? true),
       { threshold: 0.05 },
-
     );
     io.observe(el);
     return () => io.disconnect();
@@ -115,11 +108,7 @@ export function PhotoFan({ show }: PhotoFanProps) {
           >
             <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[6px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
               <div className="relative aspect-[3/4] overflow-hidden">
-                <CinemagraphVideo
-                  src={f.video}
-                  poster={f.url}
-                  playing={active}
-                />
+                <CinemagraphVideo src={f.video} poster={f.url} playing={active} />
               </div>
             </div>
           </div>
@@ -161,7 +150,6 @@ function CinemagraphVideo({
       muted
       loop
       playsInline
-      autoPlay
       preload="auto"
       aria-hidden
       className="absolute inset-0 h-full w-full object-cover"
