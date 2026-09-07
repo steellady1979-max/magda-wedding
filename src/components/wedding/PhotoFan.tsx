@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import photo1 from "@/assets/couple-1.jpeg.asset.json";
 import photo2 from "@/assets/couple-2.jpeg.asset.json";
 import photo3 from "@/assets/couple-3.jpeg.asset.json";
@@ -7,26 +8,83 @@ const silk = [0.22, 1, 0.36, 1] as const;
 
 type Frame = {
   url: string;
+  /** seamless cinemagraph loop (sea + hair only). null until the asset exists. */
+  video: string | null;
   rotate: number;
   x: string;
   scale: number;
   delay: number;
   z: number;
-  /** vertical share of the image treated as sky/sea/hair, gently animated */
-  band: string;
+  /** floating card motion */
+  floatPx: number;
+  floatDur: string;
+  floatDelay: string;
 };
 
 const frames: Frame[] = [
-  { url: photo1.url, rotate: -9, x: "-52%", scale: 0.82, delay: 0.15, z: 10, band: "62%" },
-  { url: photo2.url, rotate: 9, x: "52%", scale: 0.82, delay: 0.3, z: 10, band: "62%" },
-  { url: photo3.url, rotate: 0, x: "0%", scale: 1, delay: 0.5, z: 20, band: "58%" },
+  {
+    url: photo1.url,
+    video: null,
+    rotate: -9,
+    x: "-52%",
+    scale: 0.82,
+    delay: 0.15,
+    z: 10,
+    floatPx: 5,
+    floatDur: "9s",
+    floatDelay: "0s",
+  },
+  {
+    url: photo2.url,
+    video: null,
+    rotate: 9,
+    x: "52%",
+    scale: 0.82,
+    delay: 0.3,
+    z: 10,
+    floatPx: 4.5,
+    floatDur: "10s",
+    floatDelay: "-3.2s",
+  },
+  {
+    url: photo3.url,
+    video: null,
+    rotate: 0,
+    x: "0%",
+    scale: 1,
+    delay: 0.5,
+    z: 20,
+    floatPx: 3,
+    floatDur: "8s",
+    floatDelay: "-1.6s",
+  },
 ];
 
 type PhotoFanProps = { show: boolean };
 
 export function PhotoFan({ show }: PhotoFanProps) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
+
+  // Pause media + card float while the hero is off-screen.
+  useEffect(() => {
+    const el = hostRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.05 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const active = show && inView;
+
   return (
-    <div className="pointer-events-none absolute inset-0 z-[45] flex items-center justify-center">
+    <div
+      ref={hostRef}
+      className="pointer-events-none absolute inset-0 z-[45] flex items-center justify-center"
+    >
       {frames.map((f, i) => (
         <motion.div
           key={i}
@@ -40,47 +98,78 @@ export function PhotoFan({ show }: PhotoFanProps) {
           }
           transition={{ duration: 1.8, delay: show ? f.delay : 0, ease: silk }}
         >
-          <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[6px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
-            <div className="relative aspect-[3/4] overflow-hidden">
-              {/* static base photo */}
-              <img
-                src={f.url}
-                alt="Couple by the sea"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              {/* sea band: only the water drifts */}
-              <div
-                className="absolute inset-x-0 top-0 overflow-hidden [mask-image:linear-gradient(180deg,black_70%,transparent)]"
-                style={{ height: f.band }}
-                aria-hidden
-              >
-                <img
-                  src={f.url}
-                  alt=""
-                  loading="lazy"
-                  className="animate-sea absolute left-0 top-0 w-full origin-top object-cover"
-                  style={{ height: `calc(100% / ${parseFloat(f.band) / 100})` }}
-                />
+          {/* inner wrapper carries only the float transform, so rotation above is preserved */}
+          <div
+            className="animate-card-float"
+            style={{
+              // @ts-expect-error custom property
+              "--float": `${f.floatPx}px`,
+              animationDuration: f.floatDur,
+              animationDelay: f.floatDelay,
+              animationPlayState: active ? "running" : "paused",
+            }}
+          >
+            <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[6px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
+              <div className="relative aspect-[3/4] overflow-hidden">
+                {f.video ? (
+                  <CinemagraphVideo
+                    src={f.video}
+                    poster={f.url}
+                    playing={active}
+                  />
+                ) : (
+                  <img
+                    src={f.url}
+                    alt="Couple by the sea"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
               </div>
-              {/* hair: gentle wind sway over the flowing hair only */}
-              <div
-                className="absolute inset-0 overflow-hidden [mask-image:radial-gradient(42%_34%_at_66%_52%,black_35%,transparent_80%)]"
-                aria-hidden
-              >
-                <img
-                  src={f.url}
-                  alt=""
-                  loading="lazy"
-                  className="animate-hair absolute inset-0 h-full w-full origin-center object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_20%,transparent_55%,oklch(0.72_0.04_245_/_0.12)_100%)]" />
-
             </div>
           </div>
         </motion.div>
       ))}
     </div>
+  );
+}
+
+function CinemagraphVideo({
+  src,
+  poster,
+  playing,
+}: {
+  src: string;
+  poster: string;
+  playing: boolean;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced || !playing) {
+      v.pause();
+      return;
+    }
+    void v.play().catch(() => {});
+  }, [playing]);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="auto"
+      aria-hidden
+      className="absolute inset-0 h-full w-full object-cover"
+    />
   );
 }
