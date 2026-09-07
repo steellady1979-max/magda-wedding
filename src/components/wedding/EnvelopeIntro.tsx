@@ -43,29 +43,36 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_35%,oklch(0.72_0.04_245_/_0.28)_100%)]" />
       </motion.div>
 
-      {/* Lace trim draped in a V that meets above the seal */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-[25]"
-        style={{ filter: "brightness(0.5) sepia(1) saturate(2.6) hue-rotate(-14deg)" }}
-      >
-        <img
-          src={lace}
-          alt=""
-          width={1536}
-          height={512}
-          className="absolute left-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90 mix-blend-multiply"
+      {/* Lace trim draped in a V that meets above the seal — tinted to the ink brown */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[25]">
+        <div
+          className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90"
+          style={{
+            backgroundColor: "#3b281f",
+            maskImage: `url(${lace})`,
+            WebkitMaskImage: `url(${lace})`,
+            maskSize: "100% 100%",
+            WebkitMaskSize: "100% 100%",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+          }}
         />
         <div className="absolute inset-0 -scale-x-100">
-          <img
-            src={lace}
-            alt=""
-            width={1536}
-            height={512}
-            className="absolute left-1/2 top-[26%] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90 mix-blend-multiply"
+          <div
+            className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90"
+            style={{
+              backgroundColor: "#3b281f",
+              maskImage: `url(${lace})`,
+              WebkitMaskImage: `url(${lace})`,
+              maskSize: "100% 100%",
+              WebkitMaskSize: "100% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
           />
         </div>
       </div>
+
 
 
 
