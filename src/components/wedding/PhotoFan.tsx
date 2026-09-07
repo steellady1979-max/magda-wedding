@@ -3,13 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import photo1 from "@/assets/couple-1.jpeg.asset.json";
 import photo2 from "@/assets/couple-2.jpeg.asset.json";
 import photo3 from "@/assets/couple-3.jpeg.asset.json";
+import video1 from "@/assets/couple-1.mp4.asset.json";
+import video2 from "@/assets/couple-2.mp4.asset.json";
+import video3 from "@/assets/couple-3.mp4.asset.json";
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
 type Frame = {
   url: string;
-  /** seamless cinemagraph loop (sea + hair only). null until the asset exists. */
-  video: string | null;
+  /** seamless cinemagraph loop (sea + hair only). */
+  video: string;
   rotate: number;
   x: string;
   scale: number;
@@ -24,7 +27,7 @@ type Frame = {
 const frames: Frame[] = [
   {
     url: photo1.url,
-    video: null,
+    video: video1.url,
     rotate: -9,
     x: "-52%",
     scale: 0.82,
@@ -36,7 +39,7 @@ const frames: Frame[] = [
   },
   {
     url: photo2.url,
-    video: null,
+    video: video2.url,
     rotate: 9,
     x: "52%",
     scale: 0.82,
@@ -48,7 +51,7 @@ const frames: Frame[] = [
   },
   {
     url: photo3.url,
-    video: null,
+    video: video3.url,
     rotate: 0,
     x: "0%",
     scale: 1,
