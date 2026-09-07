@@ -71,8 +71,9 @@ export function PhotoFan({ show }: PhotoFanProps) {
     const el = hostRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      (entries) => setInView(entries[0]?.isIntersecting ?? true),
       { threshold: 0.05 },
+
     );
     io.observe(el);
     return () => io.disconnect();
