@@ -85,16 +85,17 @@ export function PhotoFan({ show }: PhotoFanProps) {
       {frames.map((f, i) => (
         <motion.div
           key={i}
-          className="absolute w-[46vw] max-w-[220px]"
+          className="absolute w-[36vw] max-w-[165px]"
           style={{ zIndex: f.z }}
           initial={{ y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }}
           animate={
             show
-              ? { y: -10, x: f.x, opacity: 1, scale: f.scale, rotate: f.rotate }
+              ? { y: -96, x: f.x, opacity: 1, scale: f.scale, rotate: f.rotate }
               : { y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }
           }
           transition={{ duration: 1.8, delay: show ? f.delay : 0, ease: silk }}
         >
+
           {/* inner wrapper carries only the float transform, so rotation above is preserved */}
           <div
             className="animate-card-float"

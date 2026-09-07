@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Landing } from "@/components/wedding/Landing";
 import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
+import { BackgroundMusic } from "@/components/wedding/BackgroundMusic";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,7 +37,9 @@ function Index() {
 
   return (
     <main className="bg-white">
+      <BackgroundMusic />
       <div className="relative h-[100svh] w-full overflow-hidden">
+
         <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
         {opened && (
           <a href="#invitation" className="envelope-continue">

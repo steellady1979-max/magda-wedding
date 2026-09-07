@@ -44,7 +44,11 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
       </motion.div>
 
       {/* Lace trim draped in a V that meets above the seal */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-[25]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[25]"
+        style={{ filter: "brightness(0.5) sepia(1) saturate(2.6) hue-rotate(-14deg)" }}
+      >
         <img
           src={lace}
           alt=""
@@ -62,6 +66,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
           />
         </div>
       </div>
+
 
 
       {/* Envelope flap that lifts open */}
