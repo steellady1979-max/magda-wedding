@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Landing } from "@/components/wedding/Landing";
 import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
+import { BackgroundMusic } from "@/components/wedding/BackgroundMusic";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
