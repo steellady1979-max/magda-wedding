@@ -115,20 +115,11 @@ export function PhotoFan({ show }: PhotoFanProps) {
           >
             <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[6px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
               <div className="relative aspect-[3/4] overflow-hidden">
-                {f.video ? (
-                  <CinemagraphVideo
-                    src={f.video}
-                    poster={f.url}
-                    playing={active}
-                  />
-                ) : (
-                  <img
-                    src={f.url}
-                    alt="Couple by the sea"
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                )}
+                <CinemagraphVideo
+                  src={f.video}
+                  poster={f.url}
+                  playing={active}
+                />
               </div>
             </div>
           </div>
