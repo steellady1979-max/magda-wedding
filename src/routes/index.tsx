@@ -37,7 +37,9 @@ function Index() {
 
   return (
     <main className="bg-white">
+      <BackgroundMusic />
       <div className="relative h-[100svh] w-full overflow-hidden">
+
         <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
         {opened && (
           <a href="#invitation" className="envelope-continue">
