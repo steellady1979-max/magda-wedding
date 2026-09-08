@@ -43,32 +43,18 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_35%,oklch(0.72_0.04_245_/_0.28)_100%)]" />
       </motion.div>
 
-      {/* Lace trim draped in a V that meets above the seal — tinted to the ink brown */}
+      {/* Lace trim draped in a V — its pale ground blends into the paper while the floral thread stays brown. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-[25]">
-        <div
-          className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90"
-          style={{
-            backgroundColor: "#3b281f",
-            maskImage: `url(${lace})`,
-            WebkitMaskImage: `url(${lace})`,
-            maskSize: "100% 100%",
-            WebkitMaskSize: "100% 100%",
-            maskRepeat: "no-repeat",
-            WebkitMaskRepeat: "no-repeat",
-          }}
+        <img
+          src={lace}
+          alt=""
+          className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] object-fill opacity-75 mix-blend-multiply [filter:sepia(1)_saturate(1.15)_hue-rotate(340deg)_brightness(.52)]"
         />
         <div className="absolute inset-0 -scale-x-100">
-          <div
-            className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] opacity-90"
-            style={{
-              backgroundColor: "#3b281f",
-              maskImage: `url(${lace})`,
-              WebkitMaskImage: `url(${lace})`,
-              maskSize: "100% 100%",
-              WebkitMaskSize: "100% 100%",
-              maskRepeat: "no-repeat",
-              WebkitMaskRepeat: "no-repeat",
-            }}
+          <img
+            src={lace}
+            alt=""
+            className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] object-fill opacity-75 mix-blend-multiply [filter:sepia(1)_saturate(1.15)_hue-rotate(340deg)_brightness(.52)]"
           />
         </div>
       </div>

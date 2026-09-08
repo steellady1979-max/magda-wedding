@@ -22,8 +22,8 @@ const frames: Frame[] = [
   {
     url: "/media/couple-1.jpg",
     video: "/media/couple-1.mp4",
-    rotate: -9,
-    x: "-52%",
+    rotate: -7,
+    x: "-86%",
     scale: 0.82,
     delay: 0.3,
     z: 10,
@@ -34,8 +34,8 @@ const frames: Frame[] = [
   {
     url: "/media/couple-2.jpg",
     video: "/media/couple-2.mp4",
-    rotate: 9,
-    x: "52%",
+    rotate: 7,
+    x: "86%",
     scale: 0.82,
     delay: 1.2,
     z: 10,
@@ -85,12 +85,12 @@ export function PhotoFan({ show }: PhotoFanProps) {
       {frames.map((f, i) => (
         <motion.div
           key={i}
-          className="absolute w-[36vw] max-w-[165px]"
+          className="absolute w-[29vw] max-w-[145px]"
           style={{ zIndex: f.z }}
           initial={{ y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }}
           animate={
             show
-              ? { y: -96, x: f.x, opacity: 1, scale: f.scale, rotate: f.rotate }
+              ? { y: -122, x: f.x, opacity: 1, scale: f.scale, rotate: f.rotate }
               : { y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }
           }
           transition={{ duration: 1.8, delay: show ? f.delay : 0, ease: silk }}
