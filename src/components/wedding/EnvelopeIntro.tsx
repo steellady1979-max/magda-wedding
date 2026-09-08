@@ -83,17 +83,6 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
         </div>
       </motion.div>
 
-      {/* Inner paper revealed beneath the flap */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-x-[6%] top-[6%] z-10 h-[70%] rounded-sm bg-porcelain paper-glow"
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: opened ? -14 : 40, opacity: opened ? 1 : 0 }}
-        transition={{ duration: 1.6, delay: opened ? 0.9 : 0, ease: silk }}
-      >
-        <div className="h-full w-full bg-[linear-gradient(180deg,oklch(1_0_0)_0%,oklch(0.97_0.012_240)_100%)]" />
-      </motion.div>
-
       {/* Wax seal */}
       <motion.button
         type="button"
