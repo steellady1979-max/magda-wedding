@@ -25,11 +25,11 @@ type Frame = {
  *  a wide card lower-left and a wide card lower-right, gently overlapping. */
 const frames: Frame[] = [
   {
-    video: hero1.url,
+    video: hero2.url,
     aspect: "aspect-[5/4]",
-    width: "w-[34vw] max-w-[168px]",
-    x: "-72%",
-    y: -34,
+    width: "w-[33vw] max-w-[162px]",
+    x: "-56%",
+    y: -28,
     rotate: -1.5,
     delay: 0.3,
     z: 10,
@@ -38,11 +38,11 @@ const frames: Frame[] = [
     floatDelay: "0s",
   },
   {
-    video: hero2.url,
+    video: hero3.url,
     aspect: "aspect-[5/4]",
-    width: "w-[33vw] max-w-[162px]",
-    x: "68%",
-    y: 62,
+    width: "w-[32vw] max-w-[158px]",
+    x: "52%",
+    y: 56,
     rotate: 1.5,
     delay: 1.2,
     z: 15,
@@ -51,11 +51,12 @@ const frames: Frame[] = [
     floatDelay: "-3.2s",
   },
   {
-    video: hero3.url,
+    // the boy gazing at the girl — always the prominent center card
+    video: hero1.url,
     aspect: "aspect-[4/5]",
     width: "w-[32vw] max-w-[158px]",
     x: "-2%",
-    y: -128,
+    y: -120,
     rotate: 0,
     delay: 2.1,
     z: 20,
