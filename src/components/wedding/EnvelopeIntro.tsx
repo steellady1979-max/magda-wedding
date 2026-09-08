@@ -40,7 +40,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
           height={1536}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_35%,oklch(0.72_0.04_245_/_0.28)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_45%,oklch(0.9_0.02_80_/_0.2)_100%)]" />
       </motion.div>
 
       {/* Lace trim draped in a V — its pale ground blends into the paper while the floral thread stays brown. */}
@@ -79,7 +79,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
             filter: "brightness(1.02)",
           }}
         >
-          <div className="h-full w-full bg-[linear-gradient(180deg,oklch(1_0_0_/_0.35),oklch(0.78_0.035_245_/_0.25))]" />
+          <div className="h-full w-full bg-[linear-gradient(180deg,oklch(1_0_0_/_0.08),oklch(0.9_0.025_80_/_0.12))]" />
         </div>
       </motion.div>
 
