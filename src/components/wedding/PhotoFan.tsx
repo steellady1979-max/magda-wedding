@@ -1,30 +1,36 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import hero1 from "@/assets/hero-1.mp4.asset.json";
+import hero2 from "@/assets/hero-2.mp4.asset.json";
+import hero3 from "@/assets/hero-3.mp4.asset.json";
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
 type Frame = {
-  url: string;
-  /** seamless cinemagraph loop (sea + hair only). */
   video: string;
-  rotate: number;
+  /** card shape, mirroring the reference collage */
+  aspect: string;
+  width: string;
   x: string;
-  scale: number;
+  y: number;
+  rotate: number;
   delay: number;
   z: number;
-  /** floating card motion */
   floatPx: number;
   floatDur: string;
   floatDelay: string;
 };
 
+/** Layout follows the reference collage: tall card up in the middle,
+ *  a wide card lower-left and a wide card lower-right, gently overlapping. */
 const frames: Frame[] = [
   {
-    url: "/media/couple-1.jpg",
-    video: "/media/couple-1.mp4",
-    rotate: -7,
-    x: "-86%",
-    scale: 0.82,
+    video: hero1.url,
+    aspect: "aspect-[5/4]",
+    width: "w-[34vw] max-w-[168px]",
+    x: "-72%",
+    y: -34,
+    rotate: -1.5,
     delay: 0.3,
     z: 10,
     floatPx: 5,
@@ -32,23 +38,25 @@ const frames: Frame[] = [
     floatDelay: "0s",
   },
   {
-    url: "/media/couple-2.jpg",
-    video: "/media/couple-2.mp4",
-    rotate: 7,
-    x: "86%",
-    scale: 0.82,
+    video: hero2.url,
+    aspect: "aspect-[5/4]",
+    width: "w-[33vw] max-w-[162px]",
+    x: "68%",
+    y: 62,
+    rotate: 1.5,
     delay: 1.2,
-    z: 10,
+    z: 15,
     floatPx: 4.5,
     floatDur: "10s",
     floatDelay: "-3.2s",
   },
   {
-    url: "/media/couple-3.jpg",
-    video: "/media/couple-3.mp4",
+    video: hero3.url,
+    aspect: "aspect-[4/5]",
+    width: "w-[32vw] max-w-[158px]",
+    x: "-2%",
+    y: -128,
     rotate: 0,
-    x: "0%",
-    scale: 1,
     delay: 2.1,
     z: 20,
     floatPx: 3,
@@ -85,17 +93,16 @@ export function PhotoFan({ show }: PhotoFanProps) {
       {frames.map((f, i) => (
         <motion.div
           key={i}
-          className="absolute w-[29vw] max-w-[145px]"
+          className={`absolute ${f.width}`}
           style={{ zIndex: f.z }}
           initial={{ y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }}
           animate={
             show
-              ? { y: -122, x: f.x, opacity: 1, scale: f.scale, rotate: f.rotate }
+              ? { y: f.y, x: f.x, opacity: 1, scale: 1, rotate: f.rotate }
               : { y: 90, x: "0%", opacity: 0, scale: 0.35, rotate: 0 }
           }
           transition={{ duration: 1.8, delay: show ? f.delay : 0, ease: silk }}
         >
-
           {/* inner wrapper carries only the float transform, so rotation above is preserved */}
           <div
             className="animate-card-float"
@@ -107,9 +114,9 @@ export function PhotoFan({ show }: PhotoFanProps) {
               animationPlayState: active ? "running" : "paused",
             }}
           >
-            <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[6px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <CinemagraphVideo src={f.video} poster={f.url} playing={active} />
+            <div className="relative overflow-hidden rounded-[2px] border border-porcelain/80 bg-porcelain p-[5px] shadow-[0_18px_45px_-18px_oklch(0.45_0.04_250_/_0.5)]">
+              <div className={`relative overflow-hidden ${f.aspect}`}>
+                <CinemagraphVideo src={f.video} playing={active} />
               </div>
             </div>
           </div>
@@ -119,15 +126,7 @@ export function PhotoFan({ show }: PhotoFanProps) {
   );
 }
 
-function CinemagraphVideo({
-  src,
-  poster,
-  playing,
-}: {
-  src: string;
-  poster: string;
-  playing: boolean;
-}) {
+function CinemagraphVideo({ src, playing }: { src: string; playing: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -147,7 +146,6 @@ function CinemagraphVideo({
     <video
       ref={ref}
       src={src}
-      poster={poster}
       muted
       loop
       playsInline
