@@ -21,15 +21,15 @@ type Frame = {
   floatDelay: string;
 };
 
-/** Layout follows the reference collage: tall card up in the middle,
- *  a wide card lower-left and a wide card lower-right, gently overlapping. */
+/** Horizontal row: left card overlaps center, center overlaps right.
+ *  Center card is vertically centred, sides sit level with it. */
 const frames: Frame[] = [
   {
     video: hero2.url,
     aspect: "aspect-[5/4]",
     width: "w-[33vw] max-w-[162px]",
-    x: "-46%",
-    y: -28,
+    x: "-92%",
+    y: -30,
     rotate: -1.5,
     delay: 0.3,
     z: 30,
@@ -40,9 +40,9 @@ const frames: Frame[] = [
   {
     video: hero3.url,
     aspect: "aspect-[5/4]",
-    width: "w-[32vw] max-w-[158px]",
-    x: "44%",
-    y: 56,
+    width: "w-[33vw] max-w-[162px]",
+    x: "92%",
+    y: -30,
     rotate: 1.5,
     delay: 1.2,
     z: 10,
@@ -55,8 +55,8 @@ const frames: Frame[] = [
     video: hero1.url,
     aspect: "aspect-[4/5]",
     width: "w-[32vw] max-w-[158px]",
-    x: "-2%",
-    y: -120,
+    x: "0%",
+    y: -30,
     rotate: 0,
     delay: 2.1,
     z: 20,
@@ -65,6 +65,7 @@ const frames: Frame[] = [
     floatDelay: "-1.6s",
   },
 ];
+
 
 type PhotoFanProps = { show: boolean };
 
