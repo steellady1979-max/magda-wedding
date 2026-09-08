@@ -41,11 +41,6 @@ function Index() {
       <div className="relative h-[100svh] w-full overflow-hidden">
 
         <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
-        {opened && (
-          <a href="#invitation" className="envelope-continue">
-            მოსაწვევის ნახვა ↓
-          </a>
-        )}
       </div>
       {opened && <Landing />}
     </main>
