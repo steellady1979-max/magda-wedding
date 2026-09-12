@@ -70,13 +70,6 @@ export function Landing() {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.22}>
-            <Button asChild variant="outline" className="wedding-button">
-              <a href={calendarUrl()} target="_blank" rel="noopener noreferrer">
-                <CalendarDays /> Google Calendar-ში დამატება
-              </a>
-            </Button>
-          </Reveal>
         </section>
         <section className="wedding-section" id="schedule" aria-labelledby="schedule-title">
           <Reveal><Divider /></Reveal>

@@ -1,8 +1,6 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import hero1 from "@/assets/hero-1.mp4.asset.json";
-import hero2 from "@/assets/hero-2.mp4.asset.json";
-import hero3 from "@/assets/hero-3.mp4.asset.json";
+import heroReveal from "@/assets/hero-reveal.mp4.asset.json";
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
@@ -21,48 +19,20 @@ type Frame = {
   floatDelay: string;
 };
 
-/** Horizontal row: left card overlaps center, center overlaps right.
- *  Center card is vertically centred, sides sit level with it. */
+/** Single centered portrait video revealed when the envelope opens. */
 const frames: Frame[] = [
   {
-    video: hero2.url,
-    aspect: "aspect-[5/4]",
-    width: "w-[33vw] max-w-[162px]",
-    x: "-92%",
-    y: 2,
-    rotate: -1.5,
-    delay: 0.3,
-    z: 30,
-    floatPx: 5,
+    video: heroReveal.url,
+    aspect: "aspect-[9/16]",
+    width: "w-[58vw] max-w-[280px]",
+    x: "0%",
+    y: 0,
+    rotate: 0,
+    delay: 0.6,
+    z: 20,
+    floatPx: 4,
     floatDur: "9s",
     floatDelay: "0s",
-  },
-  {
-    video: hero3.url,
-    aspect: "aspect-[5/4]",
-    width: "w-[33vw] max-w-[162px]",
-    x: "92%",
-    y: 2,
-    rotate: 1.5,
-    delay: 1.2,
-    z: 10,
-    floatPx: 4.5,
-    floatDur: "10s",
-    floatDelay: "-3.2s",
-  },
-  {
-    // the boy gazing at the girl — always the prominent center card
-    video: hero1.url,
-    aspect: "aspect-[4/5]",
-    width: "w-[32vw] max-w-[158px]",
-    x: "0%",
-    y: -30,
-    rotate: 0,
-    delay: 2.1,
-    z: 20,
-    floatPx: 3,
-    floatDur: "8s",
-    floatDelay: "-1.6s",
   },
 ];
 
