@@ -71,7 +71,8 @@ function Index() {
       <BackgroundMusic />
       <div className="relative h-[100svh] w-full overflow-hidden">
 
-        <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
+        <EnvelopeIntro opened={opened} gone={opened} onOpen={() => setOpened(true)} />
+        {opened && <RevealVideo />}
       </div>
       {opened && <Landing />}
     </main>
