@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import envelopeTexture from "@/assets/envelope-texture-cream.jpg";
 import waxSeal from "@/assets/wax-seal-bm.png";
-import { PhotoFan } from "./PhotoFan";
+
 import lace from "@/assets/lace.png";
 
 type EnvelopeIntroProps = {
@@ -109,7 +109,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
         />
       </motion.button>
 
-      <PhotoFan show={opened} />
+      
 
       {/* Prompt */}
       <motion.p

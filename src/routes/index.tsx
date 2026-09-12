@@ -1,9 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Landing } from "@/components/wedding/Landing";
 import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
 import { BackgroundMusic } from "@/components/wedding/BackgroundMusic";
+import heroReveal from "@/assets/hero-reveal.mp4.asset.json";
+
+function RevealVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    void v.play().catch(() => {});
+  }, []);
+  return (
+    <motion.div
+      className="absolute inset-0 z-[50] overflow-hidden bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.4, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <video
+        ref={ref}
+        src={heroReveal.url}
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden
+        className="h-full w-full object-cover"
+      />
+    </motion.div>
+  );
+}
 
 
 export const Route = createFileRoute("/")({
@@ -40,7 +71,8 @@ function Index() {
       <BackgroundMusic />
       <div className="relative h-[100svh] w-full overflow-hidden">
 
-        <EnvelopeIntro opened={opened} gone={false} onOpen={() => setOpened(true)} />
+        <EnvelopeIntro opened={opened} gone={opened} onOpen={() => setOpened(true)} />
+        {opened && <RevealVideo />}
       </div>
       {opened && <Landing />}
     </main>
