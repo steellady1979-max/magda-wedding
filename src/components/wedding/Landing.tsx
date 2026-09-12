@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, CalendarDays, Flower2 } from "lucide-react";
+import { ArrowUpRight, Flower2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { event, countdown, calendarUrl } from "@/lib/event";
+import { event, countdown } from "@/lib/event";
 import lace from "@/assets/lace.png";
 import texture from "@/assets/envelope-texture-cream.jpg";
 
@@ -69,13 +69,6 @@ export function Landing() {
                 </div>
               ))}
             </div>
-          </Reveal>
-          <Reveal delay={0.22}>
-            <Button asChild variant="outline" className="wedding-button">
-              <a href={calendarUrl()} target="_blank" rel="noopener noreferrer">
-                <CalendarDays /> Google Calendar-ში დამატება
-              </a>
-            </Button>
           </Reveal>
         </section>
         <section className="wedding-section" id="schedule" aria-labelledby="schedule-title">
