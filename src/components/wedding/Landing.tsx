@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
-import { ArrowUpRight, Flower2 } from "lucide-react";
+import { ArrowUpRight, Check, Flower2, Heart, MapPin, Send, UserRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { event, countdown } from "@/lib/event";
+import { submitRsvp } from "@/lib/rsvp.functions";
 import lace from "@/assets/lace.png";
 import texture from "@/assets/envelope-texture-cream.jpg";
 
@@ -37,6 +39,10 @@ function Divider() {
 }
 export function Landing() {
   const [remaining, setRemaining] = useState<number[] | null>(null);
+  const [name, setName] = useState("");
+  const [attendance, setAttendance] = useState<"yes" | "no" | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const sendRsvp = useServerFn(submitRsvp);
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval> | undefined;
@@ -48,6 +54,19 @@ export function Landing() {
     if (Date.now() < Date.parse(event.target)) timer = setInterval(update, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  async function handleRsvp(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (name.trim().length < 2 || !attendance) return;
+    setStatus("sending");
+    try {
+      await sendRsvp({ data: { name, attendance } });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <div className="wedding-landing" style={{ backgroundImage: `url(${texture})` }}>
       <article className="wedding-paper" id="invitation">
@@ -55,7 +74,7 @@ export function Landing() {
         <header className="wedding-heading">
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.12}><h1>{event.names}</h1></Reveal>
-          <Reveal delay={0.22}><p className="event-date">{event.date}</p></Reveal>
+          <Reveal delay={0.22}><p className="event-date"><Heart aria-hidden="true" />{event.date}</p></Reveal>
           <Reveal delay={0.34}><p className="wedding-intro">{event.invitation}</p></Reveal>
         </header>
         <section className="wedding-section countdown-section" aria-labelledby="countdown-title">
@@ -90,7 +109,7 @@ export function Landing() {
         <section className="wedding-section" aria-labelledby="location-title">
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.1}><h2 id="location-title">შეხვედრის ადგილი</h2></Reveal>
-          <Reveal delay={0.18}><h3 className="wedding-venue">{event.venue}</h3></Reveal>
+          <Reveal delay={0.18}><h3 className="wedding-venue"><MapPin aria-hidden="true" />{event.venue}</h3></Reveal>
           <Reveal delay={0.25}>
             <img
               className="wedding-location"
@@ -107,6 +126,53 @@ export function Landing() {
                 გახსენი რუკაზე <ArrowUpRight />
               </a>
             </Button>
+          </Reveal>
+        </section>
+        <section className="wedding-section wedding-rsvp-section" aria-labelledby="rsvp-title">
+          <Reveal><Divider /></Reveal>
+          <Reveal delay={0.1}><h2 id="rsvp-title">დასწრების დადასტურება</h2></Reveal>
+          <Reveal delay={0.18}><p className="wedding-note">გთხოვთ, შეგვატყობინოთ თქვენი პასუხი</p></Reveal>
+          <Reveal delay={0.26}>
+            {status === "sent" ? (
+              <div className="wedding-rsvp-success" role="status">
+                <Heart aria-hidden="true" />
+                <h3>მადლობა, {name.trim()}!</h3>
+                <p>{attendance === "yes" ? "სიხარულით დაგელოდებით." : "სამწუხაროა, რომ ვერ შემოგვიერთდებით."}</p>
+              </div>
+            ) : (
+              <form className="wedding-rsvp" onSubmit={handleRsvp}>
+                <label htmlFor="guest-name">სახელი / გვარი</label>
+                <div className="wedding-input-wrap">
+                  <UserRound aria-hidden="true" />
+                  <input
+                    id="guest-name"
+                    className="wedding-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="ჩაწერეთ სახელი და გვარი"
+                    autoComplete="name"
+                    minLength={2}
+                    maxLength={100}
+                    required
+                  />
+                </div>
+                <fieldset>
+                  <legend>შეძლებთ მობრძანებას?</legend>
+                  <div className="wedding-rsvp-options">
+                    <Button type="button" variant="outline" className={attendance === "yes" ? "is-selected" : ""} onClick={() => setAttendance("yes")} aria-pressed={attendance === "yes"}>
+                      <Check aria-hidden="true" /> სიამოვნებით
+                    </Button>
+                    <Button type="button" variant="outline" className={attendance === "no" ? "is-selected" : ""} onClick={() => setAttendance("no")} aria-pressed={attendance === "no"}>
+                      <X aria-hidden="true" /> სამწუხაროდ ვერ
+                    </Button>
+                  </div>
+                </fieldset>
+                <Button className="wedding-button wedding-submit" type="submit" disabled={status === "sending" || name.trim().length < 2 || !attendance}>
+                  {status === "sending" ? "იგზავნება…" : "პასუხის გაგზავნა"} <Send aria-hidden="true" />
+                </Button>
+                {status === "error" && <p className="wedding-rsvp-error" role="alert">პასუხი ვერ გაიგზავნა. გთხოვთ, კვლავ სცადოთ.</p>}
+              </form>
+            )}
           </Reveal>
         </section>
         <footer className="wedding-footer">
