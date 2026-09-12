@@ -297,19 +297,24 @@ html {
   scroll-behavior: smooth;
 }
 .wedding-landing {
-  padding: 45px 24px;
+  padding: 40px 24px;
   background-size: 650px auto;
-  color: #3b281f;
+  color: var(--wedding-ink);
   font-family: "DavitGuramishvili", Georgia, serif;
   text-align: center;
+  --wedding-ink: #3b281f;
+  --wedding-soft: #786455;
+  --wedding-line: #e5dac8;
+  --wedding-accent: #b9a583;
+  --wedding-paper: #fffdf9;
 }
 .wedding-paper {
   position: relative;
   max-width: 940px;
   margin: auto;
-  background: #fff;
-  border: 1px solid #ded2bf;
-  outline: 1px solid #e9e0d2;
+  background: var(--wedding-paper);
+  border: 1px solid var(--wedding-line);
+  outline: 1px solid color-mix(in oklch, var(--wedding-line), transparent 28%);
   outline-offset: -10px;
   padding: 0 55px;
   overflow: hidden;
@@ -340,11 +345,20 @@ html {
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 400;
   line-height: 1.4;
+  text-wrap: balance;
 }
 .event-date {
   font-family: "DavitGuramishvili", serif;
   font-size: 1.7rem;
   margin: 12px 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.event-date svg {
+  width: 17px;
+  color: var(--wedding-accent);
 }
 .wedding-intro {
   font-size: 1.3rem;
@@ -358,13 +372,13 @@ html {
   gap: 18px;
   align-items: center;
   justify-content: center;
-  color: #b9a583;
+  color: var(--wedding-accent);
   margin-bottom: 28px;
 }
 .wedding-divider span {
   width: 48px;
   height: 1px;
-  background: #dfd1bb;
+  background: var(--wedding-line);
 }
 .wedding-section {
   padding: 50px 0;
@@ -379,7 +393,7 @@ html {
 .wedding-note {
   font-size: 1rem;
   line-height: 1.8;
-  color: #786455;
+  color: var(--wedding-soft);
   margin: 14px 0 22px;
 }
 .wedding-button {
@@ -469,6 +483,14 @@ html {
   font-size: 2rem;
   font-weight: 400;
   margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.wedding-venue svg {
+  width: 19px;
+  color: var(--wedding-accent);
 }
 .wedding-location {
   display: block;
@@ -477,38 +499,104 @@ html {
   margin: 28px auto;
 }
 .wedding-rsvp {
-  max-width: 430px;
-  margin: 28px auto 0;
+  max-width: 480px;
+  margin: 32px auto 0;
   text-align: left;
   font-size: 1.1rem;
 }
-.wedding-rsvp fieldset {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 28px;
+.wedding-rsvp > label,
+.wedding-rsvp legend {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: var(--wedding-soft);
 }
-.wedding-rsvp fieldset label {
+.wedding-input-wrap {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  cursor: pointer;
+  margin-bottom: 26px;
 }
-.wedding-rsvp input[type="radio"] {
-  width: 19px;
-  height: 19px;
-  accent-color: #3b281f;
+.wedding-input-wrap svg {
+  position: absolute;
+  left: 16px;
+  width: 18px;
+  color: var(--wedding-accent);
 }
 .wedding-input {
-  margin: 10px 0 24px;
-  min-height: 50px;
-  border-color: #bdab90;
-  border-radius: 2px;
-  font-family: inherit;
-  font-size: 1.2rem;
-}
-.wedding-rsvp > .wedding-button {
   width: 100%;
+  min-height: 52px;
+  padding: 10px 16px 10px 46px;
+  border: 1px solid var(--wedding-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--wedding-ink);
+  font-family: inherit;
+  font-size: 1.1rem;
+  outline: none;
+}
+.wedding-input:focus {
+  border-color: var(--wedding-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--wedding-accent), transparent 82%);
+}
+.wedding-rsvp fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 26px;
+}
+.wedding-rsvp-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.wedding-rsvp-options .wedding-button,
+.wedding-rsvp-options button {
+  min-height: 52px;
+  height: auto;
+  border-color: var(--wedding-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--wedding-ink);
+  font-family: inherit;
+  font-size: 1rem;
+  box-shadow: none;
+}
+.wedding-rsvp-options button.is-selected {
+  border-color: var(--wedding-ink);
+  background: color-mix(in oklch, var(--wedding-accent), transparent 88%);
+}
+.wedding-rsvp .wedding-submit {
+  width: 100%;
+  background: var(--wedding-ink);
+  color: var(--wedding-paper);
+}
+.wedding-rsvp .wedding-submit:hover {
+  background: color-mix(in oklch, var(--wedding-ink), white 10%);
+  color: var(--wedding-paper);
+}
+.wedding-rsvp-error {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--destructive);
+}
+.wedding-rsvp-success {
+  max-width: 480px;
+  margin: 32px auto 0;
+  padding: 38px 20px;
+  border-block: 1px solid var(--wedding-line);
+}
+.wedding-rsvp-success svg {
+  width: 24px;
+  margin: 0 auto 14px;
+  color: var(--wedding-accent);
+}
+.wedding-rsvp-success h3 {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.wedding-rsvp-success p {
+  margin-top: 8px;
+  color: var(--wedding-soft);
 }
 .wedding-footer {
   border-top: 1px solid #e5dac8;
@@ -551,6 +639,9 @@ html {
   }
   .wedding-countdown span {
     font-size: 0.9rem;
+  }
+  .wedding-rsvp-options {
+    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {
