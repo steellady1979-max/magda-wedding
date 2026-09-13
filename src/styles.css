@@ -539,7 +539,7 @@ html {
   display: block;
   width: min(100%, 460px);
   height: auto;
-  aspect-ratio: 662 / 385;
+  aspect-ratio: 1309 / 839;
   padding: 0;
   overflow: visible;
   transform: translateX(-50%);
@@ -562,18 +562,25 @@ html {
   position: absolute;
   z-index: 2;
   left: 50%;
-  bottom: 13%;
+  bottom: -44px;
   display: flex;
   align-items: center;
-  gap: 7px;
   transform: translateX(-50%);
-  color: var(--wedding-soft);
+  min-width: 154px;
+  min-height: 40px;
+  justify-content: center;
+  padding: 8px 20px;
+  border: 1px solid var(--gilt);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--wedding-paper), transparent 4%);
+  color: var(--wedding-ink);
   font-family: inherit;
   font-size: 0.92rem;
   white-space: nowrap;
+  box-shadow: 0 8px 22px color-mix(in oklch, var(--wedding-ink), transparent 90%);
 }
-.letter-envelope-trigger > span svg {
-  width: 15px;
+.letter-envelope.is-open .letter-envelope-trigger > span {
+  display: none;
 }
 .letter-paper {
   position: absolute;
@@ -594,6 +601,13 @@ html {
 .letter-copy {
   display: grid;
   gap: 10px;
+}
+.letter-candelabra {
+  width: 46px;
+  height: 64px;
+  margin: -18px auto 2px;
+  object-fit: contain;
+  opacity: 0.88;
 }
 .letter-paper p {
   margin: 0;
@@ -762,6 +776,7 @@ html {
   .letter-envelope {
     min-height: 470px;
     margin-top: 10px;
+    margin-bottom: 44px;
   }
   .letter-paper {
     top: 0;
@@ -775,6 +790,11 @@ html {
   }
   .letter-copy {
     gap: 7px;
+  }
+  .letter-candelabra {
+    width: 40px;
+    height: 55px;
+    margin-top: -16px;
   }
   .wedding-rsvp-options {
     grid-template-columns: 1fr;
