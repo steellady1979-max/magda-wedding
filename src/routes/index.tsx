@@ -5,7 +5,6 @@ import { Landing } from "@/components/wedding/Landing";
 import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
 import { BackgroundMusic } from "@/components/wedding/BackgroundMusic";
-import heroReveal from "@/assets/hero-reveal.mp4.asset.json";
 
 function RevealVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -24,14 +23,17 @@ function RevealVideo() {
     >
       <video
         ref={ref}
-        src={heroReveal.url}
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
+        poster="/media/hero-reveal-poster.jpg"
         aria-hidden
         className="h-full w-full object-cover"
-      />
+      >
+        <source src="/media/hero-reveal.webm" type="video/webm" />
+        <source src="/media/hero-reveal.mp4" type="video/mp4" />
+      </video>
     </motion.div>
   );
 }
