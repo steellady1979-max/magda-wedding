@@ -38,7 +38,7 @@ export function LetterEnvelope() {
       <motion.div
         className="letter-paper"
         initial={false}
-        animate={opened ? { y: "-58%", opacity: 1 } : { y: "4%", opacity: 0 }}
+        animate={opened ? { x: "-50%", y: "-58%", opacity: 1 } : { x: "-50%", y: "4%", opacity: 0 }}
         transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
         aria-live="polite"
       >
