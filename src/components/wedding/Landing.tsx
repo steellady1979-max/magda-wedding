@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
-import { ArrowUpRight, Check, Flower2, Gem, Heart, MapPin, Music2, Send, Sparkles, UtensilsCrossed, UserRound, Wine, X } from "lucide-react";
+import { ArrowUpRight, Check, Church, Flower2, Heart, MapPin, Music2, Send, Sparkles, UtensilsCrossed, UserRound, UsersRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 
@@ -96,20 +96,24 @@ export function Landing() {
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.1}><h2 id="schedule-title">დღის განრიგი</h2></Reveal>
           <Reveal delay={0.18}><p className="wedding-note">წინასწარი განრიგი — დროები დაზუსტდება.</p></Reveal>
-          <Reveal delay={0.28}>
-            <ol className="wedding-timeline">
-              {event.schedule.map((item, index) => {
-                const Icon = [Wine, Gem, UtensilsCrossed, Music2][index] ?? Sparkles;
-                return (
-                <li key={item.time}>
+          <ol className="wedding-timeline">
+            {event.schedule.map((item, index) => {
+              const Icon = [UsersRound, Church, UtensilsCrossed, Music2][index] ?? Sparkles;
+              return (
+                <motion.li
+                  key={item.time}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <time>{item.time}</time>
                   <span className="timeline-icon" aria-hidden="true"><Icon /></span>
                   <h3>{item.title}</h3>
-                </li>
-                );
-              })}
-            </ol>
-          </Reveal>
+                </motion.li>
+              );
+            })}
+          </ol>
         </section>
         <section className="wedding-section" aria-labelledby="location-title">
           <Reveal><Divider /></Reveal>

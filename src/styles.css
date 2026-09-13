@@ -330,9 +330,9 @@ html {
   opacity: 0.7;
 }
 .wedding-lace-brown {
-  opacity: 0.72;
+  opacity: 0.64;
   mix-blend-mode: multiply;
-  filter: sepia(1) saturate(1.2) hue-rotate(340deg) brightness(0.52);
+  filter: sepia(0.82) saturate(0.72) hue-rotate(342deg) brightness(0.72) contrast(1.08);
 }
 .wedding-lace-bottom {
   transform: scaleY(-1);
@@ -381,7 +381,7 @@ html {
   background: var(--wedding-line);
 }
 .wedding-section {
-  padding: 50px 0;
+  padding: 42px 0;
   scroll-margin-top: 25px;
 }
 .wedding-section h2 {
@@ -435,16 +435,21 @@ html {
   border-radius: 70px 70px 4px 4px;
   background: color-mix(in oklch, var(--wedding-paper), var(--wedding-accent) 5%);
   box-shadow: inset 0 0 0 5px var(--wedding-paper);
+  min-width: 0;
 }
 .wedding-countdown strong {
   font-family: Georgia, serif;
   font-weight: 400;
   font-size: clamp(2rem, 5vw, 3.4rem);
   font-variant-numeric: tabular-nums;
+  display: block;
+  width: 2.4ch;
+  margin-inline: auto;
 }
 .wedding-countdown span {
   color: var(--wedding-soft);
   font-size: 0.9rem;
+  line-height: 1.35;
 }
 .wedding-timeline {
   list-style: none;
@@ -477,7 +482,7 @@ html {
   line-height: 30px;
 }
 .wedding-timeline span {
-  color: #bda98b;
+  color: var(--wedding-accent);
   text-align: center;
 }
 .wedding-timeline .timeline-icon {
@@ -487,14 +492,14 @@ html {
   width: 30px;
   height: 30px;
   place-items: center;
-  border: 1px solid var(--wedding-line);
+  border: 0;
   border-radius: 50%;
   background: var(--wedding-paper);
 }
 .wedding-timeline .timeline-icon svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 1.4;
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.15;
 }
 .wedding-timeline h3 {
   font-size: 1.2rem;
@@ -523,8 +528,8 @@ html {
 .letter-envelope {
   position: relative;
   width: min(100%, 620px);
-  min-height: 520px;
-  margin: 48px auto 15px;
+  min-height: 500px;
+  margin: 20px auto 0;
 }
 .letter-envelope-trigger {
   position: absolute;
@@ -572,41 +577,35 @@ html {
 }
 .letter-paper {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   left: 50%;
   top: 0;
   width: min(88%, 390px);
-  min-height: 345px;
-  padding: 46px 34px;
+  min-height: 365px;
+  padding: 34px 34px 42px;
   border: 1px solid var(--wedding-line);
   background: var(--wedding-paper);
   box-shadow: 0 18px 45px color-mix(in oklch, var(--wedding-ink), transparent 89%);
 }
+.letter-copy {
+  display: grid;
+  gap: 10px;
+}
 .letter-paper p {
   margin: 0;
-  color: var(--wedding-ink);
-  font-size: 1.08rem;
-  line-height: 1.8;
+  color: color-mix(in oklch, var(--wedding-ink), black 10%);
+  font-size: 1.14rem;
+  line-height: 1.72;
   text-align: left;
-  white-space: pre-line;
-}
-.typing-caret {
-  display: inline-block;
-  width: 1px;
-  height: 1em;
-  margin-left: 2px;
-  vertical-align: -0.12em;
-  background: var(--wedding-ink);
-  animation: caret-blink 0.8s steps(1) infinite;
-}
-@keyframes caret-blink {
-  50% { opacity: 0; }
 }
 .wedding-rsvp {
   max-width: 480px;
   margin: 32px auto 0;
   text-align: left;
   font-size: 1.1rem;
+}
+.wedding-rsvp-section {
+  padding-top: 32px;
 }
 .wedding-rsvp > label,
 .wedding-rsvp legend {
@@ -729,7 +728,7 @@ html {
     padding-top: 35px;
   }
   .wedding-section {
-    padding: 35px 0;
+    padding: 28px 0;
   }
   .wedding-timeline li {
     grid-template-columns: 56px 22px 1fr;
@@ -742,34 +741,57 @@ html {
     font-size: 1.1rem;
   }
   .wedding-countdown span {
-    font-size: 0.78rem;
+    font-size: clamp(0.7rem, 3.25vw, 0.82rem);
+    color: var(--wedding-ink);
   }
   .wedding-countdown {
     gap: 5px;
     margin-inline: -10px;
   }
   .wedding-countdown > div {
-    min-height: 108px;
+    min-height: 104px;
     padding-inline: 3px;
   }
   .wedding-countdown strong {
     font-size: 1.8rem;
   }
   .letter-envelope {
-    min-height: 475px;
-    margin-top: 42px;
+    min-height: 470px;
+    margin-top: 10px;
   }
   .letter-paper {
     top: 0;
-    min-height: 320px;
-    padding: 38px 25px;
+    width: min(94%, 390px);
+    min-height: 350px;
+    padding: 28px 22px 36px;
   }
   .letter-paper p {
-    font-size: 0.96rem;
+    font-size: clamp(1rem, 4.25vw, 1.1rem);
+    line-height: 1.68;
+  }
+  .letter-copy {
+    gap: 7px;
   }
   .wedding-rsvp-options {
     grid-template-columns: 1fr;
   }
+}
+.music-toggle {
+  position: fixed;
+  z-index: 60;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-color: var(--gilt);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--porcelain), transparent 12%);
+  color: var(--gilt);
+  backdrop-filter: blur(8px);
+}
+.music-toggle svg {
+  width: 15px;
+  height: 15px;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
