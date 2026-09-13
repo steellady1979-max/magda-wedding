@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -10,6 +10,10 @@ type YTPlayer = {
   mute: () => void;
   unMute: () => void;
   setVolume: (v: number) => void;
+};
+
+export type BackgroundMusicHandle = {
+  play: () => void;
 };
 
 declare global {
@@ -49,68 +53,77 @@ function loadApi(): Promise<void> {
  * Here we create a real player and call unMute()+playVideo() directly in the
  * first pointer/keydown handler, which browsers accept everywhere.
  */
-export function BackgroundMusic() {
+export const BackgroundMusic = forwardRef<BackgroundMusicHandle>(function BackgroundMusic(_, ref) {
   const holder = useRef<HTMLDivElement>(null);
   const player = useRef<YTPlayer | null>(null);
+  const ready = useRef(false);
   const [on, setOn] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const ensurePlayer = useCallback(async () => {
-    if (player.current) return player.current;
-    await loadApi();
-    if (!holder.current || !window.YT?.Player) return null;
-    player.current = new window.YT.Player(holder.current, {
-      videoId: VIDEO_ID,
-      playerVars: {
-        autoplay: 1,
-        loop: 1,
-        playlist: VIDEO_ID,
-        controls: 0,
-        playsinline: 1,
-        disablekb: 1,
-        modestbranding: 1,
-      },
-      events: {
-        onReady: (e: { target: YTPlayer }) => {
-          e.target.setVolume(70);
-          e.target.unMute();
-          e.target.playVideo();
+  useEffect(() => {
+    let cancelled = false;
+    void loadApi().then(() => {
+      if (cancelled || player.current || !holder.current || !window.YT?.Player) return;
+      player.current = new window.YT.Player(holder.current, {
+        videoId: VIDEO_ID,
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: VIDEO_ID,
+          controls: 0,
+          playsinline: 1,
+          disablekb: 1,
+          modestbranding: 1,
+          origin: window.location.origin,
         },
-        onStateChange: (e: { data: number }) => {
-          if (e.data === 0) player.current?.playVideo();
+        events: {
+          onReady: (e: { target: YTPlayer }) => {
+            ready.current = true;
+            e.target.setVolume(70);
+            e.target.mute();
+          },
+          onStateChange: (e: { data: number }) => {
+            if (e.data === 1) {
+              setOn(true);
+              setError(null);
+            } else if (e.data === 0) {
+              player.current?.playVideo();
+            } else if (e.data === 2) {
+              setOn(false);
+            }
+          },
+          onError: () => {
+            setOn(false);
+            setError("მუსიკა ვერ ჩაიტვირთა — სცადეთ ხელახლა");
+          },
         },
-      },
-    });
-    return player.current;
+      });
+    }).catch(() => setError("მუსიკა ვერ ჩაიტვირთა — სცადეთ ხელახლა"));
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const start = useCallback(async () => {
-    const p = await ensurePlayer();
-    p?.unMute();
-    p?.playVideo();
-    setOn(true);
-  }, [ensurePlayer]);
+  const start = useCallback(() => {
+    const current = player.current;
+    if (!current || !ready.current) {
+      setError("მუსიკა ჯერ იტვირთება — შეეხეთ ღილაკს ხელახლა");
+      return;
+    }
+    setError(null);
+    current.setVolume(70);
+    current.unMute();
+    current.playVideo();
+  }, []);
 
-  // First interaction anywhere on the page starts audible playback.
-  useEffect(() => {
-    if (on) return;
-    const handler = () => void start();
-    const opts = { once: true, passive: true } as const;
-    window.addEventListener("pointerdown", handler, opts);
-    window.addEventListener("touchend", handler, opts);
-    window.addEventListener("keydown", handler, { once: true });
-    return () => {
-      window.removeEventListener("pointerdown", handler);
-      window.removeEventListener("touchend", handler);
-      window.removeEventListener("keydown", handler);
-    };
-  }, [on, start]);
+  useImperativeHandle(ref, () => ({ play: start }), [start]);
 
   const toggle = () => {
     if (on) {
       player.current?.pauseVideo();
       setOn(false);
     } else {
-      void start();
+      start();
     }
   };
 
@@ -129,6 +142,7 @@ export function BackgroundMusic() {
       >
         {on ? <Volume2 aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
       </Button>
+      {error && <p className="music-error" role="status">{error}</p>}
     </>
   );
-}
+});

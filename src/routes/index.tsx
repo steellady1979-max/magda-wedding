@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { Landing } from "@/components/wedding/Landing";
 import { event } from "@/lib/event";
 import { EnvelopeIntro } from "@/components/wedding/EnvelopeIntro";
-import { BackgroundMusic } from "@/components/wedding/BackgroundMusic";
+import { BackgroundMusic, type BackgroundMusicHandle } from "@/components/wedding/BackgroundMusic";
 
 function RevealVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -61,19 +61,19 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [opened, setOpened] = useState(false);
+  const music = useRef<BackgroundMusicHandle>(null);
 
-  useEffect(() => {
-    if (opened) return;
-    const t = setTimeout(() => setOpened(true), 5200);
-    return () => clearTimeout(t);
-  }, [opened]);
+  const openInvitation = () => {
+    music.current?.play();
+    setOpened(true);
+  };
 
   return (
     <main className="bg-white">
-      <BackgroundMusic />
+      <BackgroundMusic ref={music} />
       <div className="relative h-[100svh] w-full overflow-hidden">
 
-        <EnvelopeIntro opened={opened} gone={opened} onOpen={() => setOpened(true)} />
+        <EnvelopeIntro opened={opened} gone={opened} onOpen={openInvitation} />
         {opened && <RevealVideo />}
       </div>
       {opened && <Landing />}
