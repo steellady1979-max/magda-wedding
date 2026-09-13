@@ -799,6 +799,17 @@ html {
     grid-template-columns: 1fr;
   }
 }
+.music-frame {
+  position: fixed;
+  z-index: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 2px;
+  overflow: hidden;
+  opacity: 0.01;
+  pointer-events: none;
+}
 .music-toggle {
   position: fixed;
   z-index: 60;
