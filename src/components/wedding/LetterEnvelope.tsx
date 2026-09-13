@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { MailOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import envelope from "@/assets/cream-envelope-cropped.png.asset.json";
+import envelope from "@/assets/letter-envelope-new.png.asset.json";
+import candelabra from "@/assets/letter-candelabra.png.asset.json";
 
 const message = [
   "ძვირფასო სტუმარო,",
@@ -25,6 +25,7 @@ export function LetterEnvelope() {
         aria-live="polite"
       >
         <div className="letter-copy">
+          <img className="letter-candelabra" src={candelabra.url} alt="" aria-hidden="true" />
           {message.map((line, index) => (
             <motion.p
               key={line}
@@ -51,8 +52,8 @@ export function LetterEnvelope() {
         }}
         aria-expanded={opened}
       >
-        <img src={envelope.url} alt="კრემისფერი კონვერტი" width={1240} height={1748} />
-        {!opened && <span><MailOpen aria-hidden="true" /> გახსენით წერილი</span>}
+        <img src={envelope.url} alt="მოჩუქურთმებული კონვერტი" width={1309} height={839} />
+        {!opened && <span>გახსენით წერილი</span>}
       </Button>
     </section>
   );
