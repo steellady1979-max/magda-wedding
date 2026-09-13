@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MailOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import envelope from "@/assets/cream-envelope.png.asset.json";
+import envelope from "@/assets/cream-envelope-cropped.png.asset.json";
 
 const message = `ძვირფასო სტუმარო,
 
@@ -38,7 +38,7 @@ export function LetterEnvelope() {
       <motion.div
         className="letter-paper"
         initial={false}
-        animate={opened ? { x: "-50%", y: "-58%", opacity: 1 } : { x: "-50%", y: "4%", opacity: 0 }}
+        animate={opened ? { x: "-50%", y: 0, opacity: 1 } : { x: "-50%", y: 145, opacity: 0 }}
         transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
         aria-live="polite"
       >

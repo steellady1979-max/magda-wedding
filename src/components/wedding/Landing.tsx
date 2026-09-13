@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
-import { ArrowUpRight, Check, Flower2, GlassWater, Heart, MapPin, Music2, Send, Sparkles, UserRound, X } from "lucide-react";
+import { ArrowUpRight, Check, Flower2, Gem, Heart, MapPin, Music2, Send, Sparkles, UtensilsCrossed, UserRound, Wine, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 
@@ -99,7 +99,7 @@ export function Landing() {
           <Reveal delay={0.28}>
             <ol className="wedding-timeline">
               {event.schedule.map((item, index) => {
-                const Icon = [UserRound, Heart, GlassWater, Music2][index] ?? Sparkles;
+                const Icon = [Wine, Gem, UtensilsCrossed, Music2][index] ?? Sparkles;
                 return (
                 <li key={item.time}>
                   <time>{item.time}</time>
