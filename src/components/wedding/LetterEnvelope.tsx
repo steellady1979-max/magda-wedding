@@ -49,8 +49,9 @@ export function LetterEnvelope() {
         type="button"
         variant="ghost"
         className="letter-envelope-trigger"
-        onClick={() => setOpened(true)}
-        disabled={opened}
+        onClick={() => {
+          if (!opened) setOpened(true);
+        }}
         aria-expanded={opened}
       >
         <img src={envelope.url} alt="კრემისფერი კონვერტი" width={1240} height={1748} />

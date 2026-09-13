@@ -1,8 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
-import { ArrowUpRight, Check, Flower2, Heart, MapPin, Send, UserRound, X } from "lucide-react";
+import { ArrowUpRight, Check, Flower2, GlassWater, Heart, MapPin, Music2, Send, Sparkles, UserRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 
 import { event, countdown } from "@/lib/event";
 import { submitRsvp } from "@/lib/rsvp.functions";
@@ -77,6 +78,7 @@ export function Landing() {
           <Reveal delay={0.22}><p className="event-date"><Heart aria-hidden="true" />{event.date}</p></Reveal>
           <Reveal delay={0.34}><p className="wedding-intro">{event.invitation}</p></Reveal>
         </header>
+        <Reveal><LetterEnvelope /></Reveal>
         <section className="wedding-section countdown-section" aria-labelledby="countdown-title">
           <Reveal><h2 id="countdown-title">ჩვენს დღემდე დარჩა</h2></Reveal>
           <Reveal delay={0.12}>
@@ -96,13 +98,16 @@ export function Landing() {
           <Reveal delay={0.18}><p className="wedding-note">წინასწარი განრიგი — დროები დაზუსტდება.</p></Reveal>
           <Reveal delay={0.28}>
             <ol className="wedding-timeline">
-              {event.schedule.map((item) => (
+              {event.schedule.map((item, index) => {
+                const Icon = [UserRound, Heart, GlassWater, Music2][index] ?? Sparkles;
+                return (
                 <li key={item.time}>
                   <time>{item.time}</time>
-                  <span aria-hidden="true">◇</span>
+                  <span className="timeline-icon" aria-hidden="true"><Icon /></span>
                   <h3>{item.title}</h3>
                 </li>
-              ))}
+                );
+              })}
             </ol>
           </Reveal>
         </section>
