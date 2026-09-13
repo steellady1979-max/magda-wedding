@@ -1,8 +1,5 @@
 import { motion } from "motion/react";
 import envelopeTexture from "@/assets/envelope-texture-cream.jpg";
-import waxSeal from "@/assets/wax-seal-bm.png";
-
-import lace from "@/assets/lace.png";
 
 type EnvelopeIntroProps = {
   opened: boolean;
@@ -46,13 +43,13 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
       {/* Lace trim draped in a V — its pale ground blends into the paper while the floral thread stays brown. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-[25]">
         <img
-          src={lace}
+          src="/media/lace.webp"
           alt=""
           className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] object-fill opacity-75 mix-blend-multiply [filter:sepia(1)_saturate(1.15)_hue-rotate(340deg)_brightness(.52)]"
         />
         <div className="absolute inset-0 -scale-x-100">
           <img
-            src={lace}
+            src="/media/lace.webp"
             alt=""
             className="absolute left-1/2 top-[26%] aspect-[3/1] w-[95%] max-w-[560px] origin-bottom-right -translate-x-full rotate-[30deg] object-fill opacity-75 mix-blend-multiply [filter:sepia(1)_saturate(1.15)_hue-rotate(340deg)_brightness(.52)]"
           />
@@ -99,7 +96,7 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
       >
         <span className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle,oklch(1_0_0_/_0.75),transparent_70%)] blur-xl" />
         <img
-          src={waxSeal}
+          src="/media/wax-seal-bm.webp"
           alt="Wax seal with the initials B and M"
           width={1024}
           height={1024}

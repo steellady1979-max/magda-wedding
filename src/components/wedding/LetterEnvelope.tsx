@@ -23,7 +23,7 @@ export function LetterEnvelope() {
         aria-live="polite"
       >
         <div className="letter-copy">
-          <img className="letter-candelabra" src="/media/letter-candelabra.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <img className="letter-candelabra" src="/media/letter-candelabra.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           {message.map((line, index) => (
             <motion.p
               key={line}
@@ -50,7 +50,7 @@ export function LetterEnvelope() {
         }}
         aria-expanded={opened}
       >
-        <img src="/media/letter-envelope-new.png" alt="მოჩუქურთმებული კონვერტი" width={1309} height={839} loading="lazy" decoding="async" />
+        <img src="/media/letter-envelope-new.webp" alt="მოჩუქურთმებული კონვერტი" width={900} height={577} loading="lazy" decoding="async" />
         {!opened && <span>გახსენით წერილი</span>}
       </Button>
     </section>

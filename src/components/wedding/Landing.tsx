@@ -7,7 +7,6 @@ import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 
 import { event, countdown } from "@/lib/event";
 import { submitRsvp } from "@/lib/rsvp.functions";
-import lace from "@/assets/lace.png";
 import texture from "@/assets/envelope-texture-cream.jpg";
 
 const reveal = {
@@ -71,7 +70,7 @@ export function Landing() {
   return (
     <div className="wedding-landing" style={{ backgroundImage: `url(${texture})` }}>
       <article className="wedding-paper" id="invitation">
-        <img className="wedding-lace wedding-lace-brown" src={lace} alt="" aria-hidden="true" />
+        <img className="wedding-lace wedding-lace-brown" src="/media/lace.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <header className="wedding-heading">
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.12}><h1>{event.names}</h1></Reveal>
@@ -122,7 +121,7 @@ export function Landing() {
           <Reveal delay={0.25}>
             <img
               className="wedding-location"
-              src="/images/green-house.jpg"
+               src="/media/green-house.webp"
               alt="მწვანე სახლის საქორწილო სივრცის ილუსტრაცია"
               width={1195}
               height={896}
@@ -189,7 +188,7 @@ export function Landing() {
           <Reveal delay={0.12}><p>გელოდებით სიყვარულით</p></Reveal>
           <Reveal delay={0.22}><span>{event.names} • {event.date}</span></Reveal>
         </footer>
-        <img className="wedding-lace wedding-lace-brown wedding-lace-bottom" src={lace} alt="" aria-hidden="true" />
+        <img className="wedding-lace wedding-lace-brown wedding-lace-bottom" src="/media/lace.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       </article>
     </div>
   );
