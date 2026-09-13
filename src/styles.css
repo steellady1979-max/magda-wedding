@@ -827,6 +827,23 @@ html {
   width: 15px;
   height: 15px;
 }
+.music-error {
+  position: fixed;
+  z-index: 60;
+  top: 52px;
+  right: 12px;
+  max-width: 220px;
+  margin: 0;
+  padding: 6px 9px;
+  border: 1px solid var(--gilt);
+  border-radius: 4px;
+  background: color-mix(in oklch, var(--porcelain), transparent 4%);
+  color: var(--ink);
+  font-family: var(--font-georgian);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-align: right;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
