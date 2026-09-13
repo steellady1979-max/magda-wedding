@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const VIDEO_ID = "-Ai3nowbLU8";
 
@@ -34,14 +36,16 @@ export function BackgroundMusic() {
           className="pointer-events-none fixed left-0 top-0 h-px w-px opacity-0"
         />
       )}
-      <button
+      <Button
         type="button"
+        variant="outline"
+        size="icon"
         onClick={() => setOn((v) => !v)}
         aria-label={on ? "მუსიკის გამორთვა" : "მუსიკის ჩართვა"}
-        className="fixed right-4 top-4 z-[60] flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/80 text-base text-foreground backdrop-blur"
+        className="music-toggle"
       >
-        {on ? "♪" : "♪̸"}
-      </button>
+        {on ? <Volume2 aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
+      </Button>
     </>
   );
 }

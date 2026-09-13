@@ -1,48 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MailOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import envelope from "@/assets/cream-envelope-cropped.png.asset.json";
 
-const message = `ძვირფასო სტუმარო,
-
-დადგა დღე, რომელსაც დიდი ხანია ველოდებით.
-გვინდა, ჩვენი ბედნიერების ყველაზე ლამაზი მომენტი თქვენთან ერთად გავიზიაროთ — სიცილით, მუსიკით და ბევრი სიყვარულით.
-
-გელოდებით ჩვენს განსაკუთრებულ დღეს`;
+const message = [
+  "ძვირფასო სტუმარო,",
+  "დადგა დღე, რომელსაც დიდი ხანია ველოდებით.",
+  "გვინდა, ჩვენი ბედნიერების ყველაზე ლამაზი მომენტი თქვენთან ერთად გავიზიაროთ — სიცილით, მუსიკით და ბევრი სიყვარულით.",
+  "გელოდებით ჩვენს განსაკუთრებულ დღეს",
+];
 
 export function LetterEnvelope() {
   const [opened, setOpened] = useState(false);
-  const [visibleText, setVisibleText] = useState("");
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (!opened) return;
-    if (reduceMotion) {
-      setVisibleText(message);
-      return;
-    }
-
-    setVisibleText("");
-    let index = 0;
-    const timer = window.setInterval(() => {
-      index += 1;
-      setVisibleText(message.slice(0, index));
-      if (index >= message.length) window.clearInterval(timer);
-    }, 32);
-    return () => window.clearInterval(timer);
-  }, [opened, reduceMotion]);
 
   return (
     <section className={`letter-envelope ${opened ? "is-open" : ""}`} aria-label="წყვილის მიმართვა">
       <motion.div
         className="letter-paper"
         initial={false}
-        animate={opened ? { x: "-50%", y: 0, opacity: 1 } : { x: "-50%", y: 145, opacity: 0 }}
-        transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
+        animate={opened ? { x: "-50%", y: 0, opacity: 1 } : { x: "-50%", y: 155, opacity: 0 }}
+        transition={{ duration: reduceMotion ? 0 : 1.15, ease: [0.22, 1, 0.36, 1] }}
         aria-live="polite"
       >
-        <p>{visibleText}<span className="typing-caret" aria-hidden="true" /></p>
+        <div className="letter-copy">
+          {message.map((line, index) => (
+            <motion.p
+              key={line}
+              initial={false}
+              animate={{ opacity: opened ? 1 : 0, y: opened ? 0 : 6 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.7,
+                delay: reduceMotion ? 0 : 1.15 + index * 0.42,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {line}
+            </motion.p>
+          ))}
+        </div>
       </motion.div>
 
       <Button
