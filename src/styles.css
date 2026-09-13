@@ -6,8 +6,7 @@
 
 @font-face {
   font-family: "GeorgianDisplay";
-  src: url("/__l5e/assets-v1/efa71def-9caa-453e-a8ee-d30372becadc/georgian-display.ttf")
-    format("truetype");
+  src: url("/fonts/davit-guramishvili.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
