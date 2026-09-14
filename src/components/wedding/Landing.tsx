@@ -41,6 +41,9 @@ export function Landing() {
   const [remaining, setRemaining] = useState<number[] | null>(null);
   const [name, setName] = useState("");
   const [attendance, setAttendance] = useState<"yes" | "no" | null>(null);
+  const [party, setParty] = useState<"solo" | "plus_one" | "family">("solo");
+  const [guests, setGuests] = useState(1);
+  const [companions, setCompanions] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const sendRsvp = useServerFn(submitRsvp);
 
@@ -60,7 +63,15 @@ export function Landing() {
     if (name.trim().length < 2 || !attendance) return;
     setStatus("sending");
     try {
-      await sendRsvp({ data: { name, attendance } });
+      await sendRsvp({
+        data: {
+          name,
+          attendance,
+          party: attendance === "yes" ? party : "solo",
+          guests: attendance === "yes" ? guests : 1,
+          companions: attendance === "yes" ? companions : "",
+        },
+      });
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -175,6 +186,63 @@ export function Landing() {
                     </Button>
                   </div>
                 </fieldset>
+                {attendance === "yes" && (
+                  <>
+                    <fieldset>
+                      <legend>როგორ მოხვდებით?</legend>
+                      <div className="wedding-rsvp-options is-three">
+                        {([
+                          ["solo", "მარტო", UserRound],
+                          ["plus_one", "+1", UsersRound],
+                          ["family", "ოჯახით", Heart],
+                        ] as const).map(([value, label, Icon]) => (
+                          <Button
+                            key={value}
+                            type="button"
+                            variant="outline"
+                            className={party === value ? "is-selected" : ""}
+                            aria-pressed={party === value}
+                            onClick={() => {
+                              setParty(value);
+                              setGuests(value === "solo" ? 1 : value === "plus_one" ? 2 : Math.max(3, guests));
+                            }}
+                          >
+                            <Icon aria-hidden="true" /> {label}
+                          </Button>
+                        ))}
+                      </div>
+                    </fieldset>
+                    {party !== "solo" && (
+                      <>
+                        <label htmlFor="guest-count">სტუმრების რაოდენობა (თქვენ ჩათვლით)</label>
+                        <div className="wedding-input-wrap">
+                          <UsersRound aria-hidden="true" />
+                          <input
+                            id="guest-count"
+                            className="wedding-input"
+                            type="number"
+                            min={2}
+                            max={12}
+                            value={guests}
+                            onChange={(e) => setGuests(Number(e.target.value))}
+                          />
+                        </div>
+                        <label htmlFor="guest-companions">თანმხლები სტუმრების სახელები</label>
+                        <div className="wedding-input-wrap">
+                          <UserRound aria-hidden="true" />
+                          <input
+                            id="guest-companions"
+                            className="wedding-input"
+                            value={companions}
+                            onChange={(e) => setCompanions(e.target.value)}
+                            placeholder="მაგ. ნინო, გიორგი"
+                            maxLength={300}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
                 <Button className="wedding-button wedding-submit" type="submit" disabled={status === "sending" || name.trim().length < 2 || !attendance}>
                   {status === "sending" ? "იგზავნება…" : "პასუხის გაგზავნა"} <Send aria-hidden="true" />
                 </Button>
