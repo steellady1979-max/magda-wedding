@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -32,6 +32,31 @@ export const BackgroundMusic = forwardRef<BackgroundMusicHandle>(function Backgr
 
   useImperativeHandle(ref, () => ({ play }), [play]);
 
+  // Try to start on load; browsers that block it get a one-time gesture fallback.
+  useEffect(() => {
+    const current = audio.current;
+    if (!current) return;
+
+    const attempt = current.play();
+    if (!attempt) return;
+
+    void attempt.catch(() => {
+      const start = () => {
+        play();
+        remove();
+      };
+      const remove = () => {
+        ["pointerdown", "touchstart", "keydown", "scroll"].forEach((e) =>
+          window.removeEventListener(e, start),
+        );
+      };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach((e) =>
+        window.addEventListener(e, start, { once: true, passive: true }),
+      );
+      return remove;
+    });
+  }, [play]);
+
   const toggle = () => {
     const current = audio.current;
     if (!current) return;
@@ -49,8 +74,9 @@ export const BackgroundMusic = forwardRef<BackgroundMusicHandle>(function Backgr
         ref={audio}
         src={AUDIO_URL}
         loop
+        autoPlay
         playsInline
-        preload="metadata"
+        preload="auto"
         onPlay={() => {
           setOn(true);
           setError(null);
