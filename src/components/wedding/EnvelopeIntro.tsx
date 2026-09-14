@@ -110,11 +110,11 @@ export function EnvelopeIntro({ opened, gone, onOpen, tapLabel, geo }: EnvelopeI
 
       {/* Prompt */}
       <motion.p
-        className="absolute bottom-[9%] z-40 text-[0.66rem] uppercase tracking-luxe text-ink-soft"
+        className="font-geo absolute bottom-[9%] z-40 text-[1.15rem] tracking-[0.08em] text-ink-soft"
         animate={{ opacity: opened ? 0 : 1 }}
         transition={{ duration: 0.6 }}
       >
-        Tap to open
+        გახსენი მოსაწვევი
       </motion.p>
     </motion.div>
   );
