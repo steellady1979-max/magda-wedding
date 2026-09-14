@@ -669,6 +669,13 @@ html {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
+.wedding-rsvp-options.is-three {
+  grid-template-columns: repeat(3, 1fr);
+}
+.wedding-rsvp-options.is-three button {
+  font-size: 0.95rem;
+  padding-inline: 8px;
+}
 .wedding-rsvp-options .wedding-button,
 .wedding-rsvp-options button {
   min-height: 52px;
