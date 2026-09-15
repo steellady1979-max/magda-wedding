@@ -6,7 +6,7 @@ export const event = {
   calendarEnd: "20261101", // Exclusive end for an all-day event.
   invitation: "სიყვარულით გიწვევთ ჩვენი ცხოვრების განსაკუთრებული დღის გასაზიარებლად.",
   venue: "მწვანე სახლი",
-  map: "https://maps.app.goo.gl/B1eXHwL7XtwfLH3V9?g_st=ic",
+  map: "https://www.google.com/maps?q=HM48+FCH+Green+House,+Makho&ftid=0x40678fae24d67d13:0x445517a1fdc3afa5&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100820247,100822504&g_ep=CAISEjI2LjM2LjMuOTczNTQ4ODUxMBgAINeCAypTLDk0Mjk3Njk5LDk0MjMxMTg4LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDk0Mjg2ODY5LDEwMDgyMDI0NywxMDA4MjI1MDRCAkdF&skid=418f48f9-0374-4117-a0be-108a35918935&g_st=ifm",
   rsvpForm:
     "https://docs.google.com/forms/d/e/1FAIpQLScd8sSg0ulQC-YJbXPD16B5HAezY71OKfG53RiddU0S7qOESw/viewform",
   schedule: [
