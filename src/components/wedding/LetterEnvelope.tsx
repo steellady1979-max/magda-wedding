@@ -25,7 +25,7 @@ export function LetterEnvelope() {
         loading="lazy"
         decoding="async"
         initial={false}
-        animate={opened ? { opacity: 0, y: -18, scale: 0.97 } : { opacity: 1, y: 0, scale: 1 }}
+        animate={opened ? { x: "-50%", opacity: 0, y: -18, scale: 0.97 } : { x: "-50%", opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: reduceMotion ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] }}
       />
       <motion.div
