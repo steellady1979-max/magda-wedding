@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
+import coupleFrame from "@/assets/couple-frame-cutout.png.asset.json";
 
 const message = [
   "ძვირფასო სტუმარო,",
@@ -15,11 +16,23 @@ export function LetterEnvelope() {
 
   return (
     <section className={`letter-envelope ${opened ? "is-open" : ""}`} aria-label="წყვილის მიმართვა">
+      <motion.img
+        className="letter-couple-art"
+        src={coupleFrame.url}
+        alt="პატარძლისა და სიძის ილუსტრაცია"
+        width={970}
+        height={802}
+        loading="lazy"
+        decoding="async"
+        initial={false}
+        animate={opened ? { x: "-50%", opacity: 0, y: -18, scale: 0.97 } : { x: "-50%", opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: reduceMotion ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] }}
+      />
       <motion.div
         className="letter-paper"
         initial={false}
         animate={opened ? { x: "-50%", y: 0, opacity: 1 } : { x: "-50%", y: 155, opacity: 0 }}
-        transition={{ duration: reduceMotion ? 0 : 1.15, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: reduceMotion ? 0 : 1.15, delay: opened && !reduceMotion ? 0.28 : 0, ease: [0.22, 1, 0.36, 1] }}
         aria-live="polite"
       >
         <div className="letter-copy">
@@ -31,7 +44,7 @@ export function LetterEnvelope() {
               animate={{ opacity: opened ? 1 : 0, y: opened ? 0 : 6 }}
               transition={{
                 duration: reduceMotion ? 0 : 0.7,
-                delay: reduceMotion ? 0 : 1.15 + index * 0.42,
+                delay: reduceMotion ? 0 : 1.43 + index * 0.42,
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
