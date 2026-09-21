@@ -505,6 +505,49 @@ html {
   font-weight: 400;
   line-height: 30px;
 }
+.wedding-timeline .timeline-body {
+  padding-bottom: 14px;
+}
+.wedding-timeline .timeline-note {
+  margin-top: 2px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: color-mix(in oklch, var(--wedding-ink), transparent 25%);
+}
+.wedding-timeline .timeline-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 5px 12px;
+  border: 1px solid var(--wedding-line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--wedding-ink);
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.wedding-timeline .timeline-map:hover {
+  background: color-mix(in oklch, var(--wedding-accent), transparent 88%);
+}
+.wedding-timeline .timeline-map svg {
+  width: 14px;
+  height: 14px;
+  color: var(--wedding-accent);
+}
+.wedding-places {
+  display: grid;
+  gap: 42px;
+  margin-top: 26px;
+}
+.wedding-place .wedding-location {
+  margin-bottom: 14px;
+}
+.wedding-place .wedding-note {
+  margin-bottom: 14px;
+}
+
 .wedding-venue {
   font-size: 2rem;
   font-weight: 400;
@@ -682,6 +725,10 @@ html {
 .wedding-rsvp-options.is-three {
   grid-template-columns: repeat(3, 1fr);
 }
+.wedding-rsvp-options.is-counts {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .wedding-rsvp-options.is-three button {
   font-size: 0.95rem;
   padding-inline: 8px;
@@ -819,6 +866,10 @@ html {
   .wedding-rsvp-options {
     grid-template-columns: 1fr;
   }
+  .wedding-rsvp-options.is-counts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }
 .music-frame {
   position: fixed;

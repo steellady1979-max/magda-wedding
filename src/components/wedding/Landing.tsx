@@ -8,6 +8,8 @@ import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 import { event, countdown } from "@/lib/event";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import texture from "@/assets/envelope-texture-cream.jpg";
+import ceremonyArt from "@/assets/ceremony-garden.jpg.asset.json";
+
 
 const reveal = {
   hidden: { opacity: 0, y: 18 },
@@ -119,34 +121,58 @@ export function Landing() {
                 >
                   <time>{item.time}</time>
                   <span className="timeline-icon" aria-hidden="true"><Icon /></span>
-                  <h3>{item.title}</h3>
+                  <div className="timeline-body">
+                    <h3>{item.title}</h3>
+                    {item.note ? <p className="timeline-note">{item.note}</p> : null}
+                    {item.map ? (
+                      <a className="timeline-map" href={item.map} target="_blank" rel="noopener noreferrer">
+                        <MapPin aria-hidden="true" /> იხილე რუკაზე
+                      </a>
+                    ) : null}
+                  </div>
                 </motion.li>
               );
             })}
           </ol>
         </section>
-        <section className="wedding-section" aria-labelledby="location-title">
+        <section className="wedding-section" id="locations" aria-labelledby="location-title">
           <Reveal><Divider /></Reveal>
-          <Reveal delay={0.1}><h2 id="location-title">შეხვედრის ადგილი</h2></Reveal>
-          <Reveal delay={0.18}><h3 className="wedding-venue"><MapPin aria-hidden="true" />{event.venue}</h3></Reveal>
-          <Reveal delay={0.25}>
-            <img
-              className="wedding-location"
-               src="/media/green-house.webp"
-              alt="მწვანე სახლის საქორწილო სივრცის ილუსტრაცია"
-              width={1195}
-              height={896}
-              loading="lazy"
-            />
-          </Reveal>
-          <Reveal delay={0.32}>
-            <Button asChild variant="outline" className="wedding-button">
-              <a href={event.map} target="_blank" rel="noopener noreferrer">
-                გახსენი რუკაზე <ArrowUpRight />
-              </a>
-            </Button>
-          </Reveal>
+          <Reveal delay={0.1}><h2 id="location-title">ლოკაციები</h2></Reveal>
+          <div className="wedding-places">
+            {[
+              {
+                title: "ხელმოწერის ცერემონია",
+                place: "მწვანე კონცხი — ბოტანიკური ბაღი",
+                note: "ჩაქვის მხრიდან",
+                img: ceremonyArt.url,
+                alt: "ხელმოწერის ცერემონიის სივრცის ფერწერული ილუსტრაცია",
+                map: event.ceremonyMap,
+              },
+              {
+                title: "საზეიმო ვახშამი",
+                place: event.venue,
+                note: "",
+                img: "/media/green-house.webp",
+                alt: "მწვანე სახლის საქორწილო სივრცის ილუსტრაცია",
+                map: event.map,
+              },
+            ].map((place, i) => (
+              <Reveal key={place.title} delay={0.18 + i * 0.1}>
+                <article className="wedding-place">
+                  <img className="wedding-location" src={place.img} alt={place.alt} loading="lazy" decoding="async" />
+                  <h3 className="wedding-venue"><MapPin aria-hidden="true" />{place.title}</h3>
+                  <p className="wedding-note">{place.place}{place.note ? ` (${place.note})` : ""}</p>
+                  <Button asChild variant="outline" className="wedding-button">
+                    <a href={place.map} target="_blank" rel="noopener noreferrer">
+                      იხილე რუკაზე <ArrowUpRight />
+                    </a>
+                  </Button>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </section>
+
         <section className="wedding-section wedding-rsvp-section" aria-labelledby="rsvp-title">
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.1}><h2 id="rsvp-title">დასწრების დადასტურება</h2></Reveal>
@@ -189,44 +215,27 @@ export function Landing() {
                 {attendance === "yes" && (
                   <>
                     <fieldset>
-                      <legend>როგორ მოხვდებით?</legend>
-                      <div className="wedding-rsvp-options is-three">
-                        {([
-                          ["solo", "მარტო", UserRound],
-                          ["plus_one", "+1", UsersRound],
-                          ["family", "ოჯახით", Heart],
-                        ] as const).map(([value, label, Icon]) => (
+                      <legend>რამდენი ადამიანი მოდის?</legend>
+                      <div className="wedding-rsvp-options is-counts">
+                        {[1, 2, 3, 4, 5, 6].map((count) => (
                           <Button
-                            key={value}
+                            key={count}
                             type="button"
                             variant="outline"
-                            className={party === value ? "is-selected" : ""}
-                            aria-pressed={party === value}
+                            className={guests === count ? "is-selected" : ""}
+                            aria-pressed={guests === count}
                             onClick={() => {
-                              setParty(value);
-                              setGuests(value === "solo" ? 1 : value === "plus_one" ? 2 : Math.max(3, guests));
+                              setGuests(count);
+                              setParty(count === 1 ? "solo" : count === 2 ? "plus_one" : "family");
                             }}
                           >
-                            <Icon aria-hidden="true" /> {label}
+                            {count === 1 ? "მარტო" : `+${count - 1}`}
                           </Button>
                         ))}
                       </div>
                     </fieldset>
-                    {party !== "solo" && (
+                    {guests > 1 && (
                       <>
-                        <label htmlFor="guest-count">სტუმრების რაოდენობა (თქვენ ჩათვლით)</label>
-                        <div className="wedding-input-wrap">
-                          <UsersRound aria-hidden="true" />
-                          <input
-                            id="guest-count"
-                            className="wedding-input"
-                            type="number"
-                            min={2}
-                            max={12}
-                            value={guests}
-                            onChange={(e) => setGuests(Number(e.target.value))}
-                          />
-                        </div>
                         <label htmlFor="guest-companions">თანმხლები სტუმრების სახელები</label>
                         <div className="wedding-input-wrap">
                           <UserRound aria-hidden="true" />
@@ -235,14 +244,16 @@ export function Landing() {
                             className="wedding-input"
                             value={companions}
                             onChange={(e) => setCompanions(e.target.value)}
-                            placeholder="მაგ. ნინო, გიორგი"
+                            placeholder="მაგ. ნინო ბერიძე, გიორგი ხარაზი"
                             maxLength={300}
+                            required
                           />
                         </div>
                       </>
                     )}
                   </>
                 )}
+
                 <Button className="wedding-button wedding-submit" type="submit" disabled={status === "sending" || name.trim().length < 2 || !attendance}>
                   {status === "sending" ? "იგზავნება…" : "პასუხის გაგზავნა"} <Send aria-hidden="true" />
                 </Button>
