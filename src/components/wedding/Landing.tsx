@@ -227,6 +227,7 @@ export function Landing() {
                             onClick={() => {
                               setGuests(count);
                               setParty(count === 1 ? "solo" : count === 2 ? "plus_one" : "family");
+                              if (count === 1) setCompanions("");
                             }}
                           >
                             {count === 1 ? "მარტო" : `+${count - 1}`}
