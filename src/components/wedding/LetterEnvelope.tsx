@@ -17,10 +17,10 @@ export function LetterEnvelope() {
     <section className={`letter-envelope ${opened ? "is-open" : ""}`} aria-label="წყვილის მიმართვა">
       <motion.img
         className="letter-couple-art"
-        src="/media/couple-frame.jpeg"
+        src="/media/couple-frame-transparent.webp"
         alt="პატარძლისა და სიძის ილუსტრაცია"
-        width={1320}
-        height={1171}
+        width={990}
+        height={639}
         loading="lazy"
         decoding="async"
         initial={false}
