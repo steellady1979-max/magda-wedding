@@ -215,44 +215,27 @@ export function Landing() {
                 {attendance === "yes" && (
                   <>
                     <fieldset>
-                      <legend>როგორ მოხვდებით?</legend>
-                      <div className="wedding-rsvp-options is-three">
-                        {([
-                          ["solo", "მარტო", UserRound],
-                          ["plus_one", "+1", UsersRound],
-                          ["family", "ოჯახით", Heart],
-                        ] as const).map(([value, label, Icon]) => (
+                      <legend>რამდენი ადამიანი მოდის?</legend>
+                      <div className="wedding-rsvp-options is-counts">
+                        {[1, 2, 3, 4, 5, 6].map((count) => (
                           <Button
-                            key={value}
+                            key={count}
                             type="button"
                             variant="outline"
-                            className={party === value ? "is-selected" : ""}
-                            aria-pressed={party === value}
+                            className={guests === count ? "is-selected" : ""}
+                            aria-pressed={guests === count}
                             onClick={() => {
-                              setParty(value);
-                              setGuests(value === "solo" ? 1 : value === "plus_one" ? 2 : Math.max(3, guests));
+                              setGuests(count);
+                              setParty(count === 1 ? "solo" : count === 2 ? "plus_one" : "family");
                             }}
                           >
-                            <Icon aria-hidden="true" /> {label}
+                            {count === 1 ? "მარტო" : `+${count - 1}`}
                           </Button>
                         ))}
                       </div>
                     </fieldset>
-                    {party !== "solo" && (
+                    {guests > 1 && (
                       <>
-                        <label htmlFor="guest-count">სტუმრების რაოდენობა (თქვენ ჩათვლით)</label>
-                        <div className="wedding-input-wrap">
-                          <UsersRound aria-hidden="true" />
-                          <input
-                            id="guest-count"
-                            className="wedding-input"
-                            type="number"
-                            min={2}
-                            max={12}
-                            value={guests}
-                            onChange={(e) => setGuests(Number(e.target.value))}
-                          />
-                        </div>
                         <label htmlFor="guest-companions">თანმხლები სტუმრების სახელები</label>
                         <div className="wedding-input-wrap">
                           <UserRound aria-hidden="true" />
@@ -261,14 +244,16 @@ export function Landing() {
                             className="wedding-input"
                             value={companions}
                             onChange={(e) => setCompanions(e.target.value)}
-                            placeholder="მაგ. ნინო, გიორგი"
+                            placeholder="მაგ. ნინო ბერიძე, გიორგი ხარაზი"
                             maxLength={300}
+                            required
                           />
                         </div>
                       </>
                     )}
                   </>
                 )}
+
                 <Button className="wedding-button wedding-submit" type="submit" disabled={status === "sending" || name.trim().length < 2 || !attendance}>
                   {status === "sending" ? "იგზავნება…" : "პასუხის გაგზავნა"} <Send aria-hidden="true" />
                 </Button>
