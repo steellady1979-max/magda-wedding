@@ -27,7 +27,6 @@ export const event = {
       map: "https://www.google.com/maps/place/Botanical+Garden+parking/@41.7066494,41.7198399,17z/data=!3m1!4b1!4m6!3m5!1s0x405d7d03eefd0887:0x6e3aba8a464537fc!8m2!3d41.7066494!4d41.7224148!16s%2Fg%2F11qbs5mww1?entry=ttu",
     },
     { time: "18:00", title: "საზეიმო ვახშამი", note: "მწვანე სახლი" },
-    { time: "20:00", title: "ცეკვა და გართობა", note: "" },
   ],
 };
 
