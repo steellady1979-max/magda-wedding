@@ -8,6 +8,8 @@ import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 import { event, countdown } from "@/lib/event";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import texture from "@/assets/envelope-texture-cream.jpg";
+import ceremonyArt from "@/assets/ceremony-garden.jpg.asset.json";
+
 
 const reveal = {
   hidden: { opacity: 0, y: 18 },
