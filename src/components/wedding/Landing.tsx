@@ -119,34 +119,58 @@ export function Landing() {
                 >
                   <time>{item.time}</time>
                   <span className="timeline-icon" aria-hidden="true"><Icon /></span>
-                  <h3>{item.title}</h3>
+                  <div className="timeline-body">
+                    <h3>{item.title}</h3>
+                    {item.note ? <p className="timeline-note">{item.note}</p> : null}
+                    {item.map ? (
+                      <a className="timeline-map" href={item.map} target="_blank" rel="noopener noreferrer">
+                        <MapPin aria-hidden="true" /> იხილე რუკაზე
+                      </a>
+                    ) : null}
+                  </div>
                 </motion.li>
               );
             })}
           </ol>
         </section>
-        <section className="wedding-section" aria-labelledby="location-title">
+        <section className="wedding-section" id="locations" aria-labelledby="location-title">
           <Reveal><Divider /></Reveal>
-          <Reveal delay={0.1}><h2 id="location-title">შეხვედრის ადგილი</h2></Reveal>
-          <Reveal delay={0.18}><h3 className="wedding-venue"><MapPin aria-hidden="true" />{event.venue}</h3></Reveal>
-          <Reveal delay={0.25}>
-            <img
-              className="wedding-location"
-               src="/media/green-house.webp"
-              alt="მწვანე სახლის საქორწილო სივრცის ილუსტრაცია"
-              width={1195}
-              height={896}
-              loading="lazy"
-            />
-          </Reveal>
-          <Reveal delay={0.32}>
-            <Button asChild variant="outline" className="wedding-button">
-              <a href={event.map} target="_blank" rel="noopener noreferrer">
-                გახსენი რუკაზე <ArrowUpRight />
-              </a>
-            </Button>
-          </Reveal>
+          <Reveal delay={0.1}><h2 id="location-title">ლოკაციები</h2></Reveal>
+          <div className="wedding-places">
+            {[
+              {
+                title: "ხელმოწერის ცერემონია",
+                place: "მწვანე კონცხი — ბოტანიკური ბაღი",
+                note: "ჩაქვის მხრიდან",
+                img: ceremonyArt.url,
+                alt: "ხელმოწერის ცერემონიის სივრცის ფერწერული ილუსტრაცია",
+                map: event.ceremonyMap,
+              },
+              {
+                title: "საზეიმო ვახშამი",
+                place: event.venue,
+                note: "",
+                img: "/media/green-house.webp",
+                alt: "მწვანე სახლის საქორწილო სივრცის ილუსტრაცია",
+                map: event.map,
+              },
+            ].map((place, i) => (
+              <Reveal key={place.title} delay={0.18 + i * 0.1}>
+                <article className="wedding-place">
+                  <img className="wedding-location" src={place.img} alt={place.alt} loading="lazy" decoding="async" />
+                  <h3 className="wedding-venue"><MapPin aria-hidden="true" />{place.title}</h3>
+                  <p className="wedding-note">{place.place}{place.note ? ` (${place.note})` : ""}</p>
+                  <Button asChild variant="outline" className="wedding-button">
+                    <a href={place.map} target="_blank" rel="noopener noreferrer">
+                      იხილე რუკაზე <ArrowUpRight />
+                    </a>
+                  </Button>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </section>
+
         <section className="wedding-section wedding-rsvp-section" aria-labelledby="rsvp-title">
           <Reveal><Divider /></Reveal>
           <Reveal delay={0.1}><h2 id="rsvp-title">დასწრების დადასტურება</h2></Reveal>
