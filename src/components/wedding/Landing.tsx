@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { motion } from "motion/react";
-import { ArrowUpRight, Check, Church, Flower2, Heart, MapPin, Music2, Send, Sparkles, UtensilsCrossed, UserRound, UsersRound, X } from "lucide-react";
+import { ArrowUpRight, Check, Church, Flower2, Heart, MapPin, Send, Sparkles, UtensilsCrossed, UserRound, UsersRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 
@@ -110,7 +110,7 @@ export function Landing() {
           <Reveal delay={0.18}><p className="wedding-note">წინასწარი განრიგი — დროები დაზუსტდება.</p></Reveal>
           <ol className="wedding-timeline">
             {event.schedule.map((item, index) => {
-              const Icon = [UsersRound, Church, UtensilsCrossed, Music2][index] ?? Sparkles;
+              const Icon = [UsersRound, Church, UtensilsCrossed][index] ?? Sparkles;
               return (
                 <motion.li
                   key={item.time}
