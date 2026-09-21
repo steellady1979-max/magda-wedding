@@ -1,3 +1,6 @@
+const greenHouseMap =
+  "https://www.google.com/maps/place/Green+House/@41.5562969,41.6630383,652m/data=!3m1!1e3!4m6!3m5!1s0x40678fae24d67d13:0x445517a1fdc3afa5!8m2!3d41.5561956!4d41.6661165!16s%2Fg%2F11nxvdzm92!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D";
+
 export const event = {
   names: "ბექა & მაგდა",
   date: "31.10.2026",
@@ -6,7 +9,7 @@ export const event = {
   calendarEnd: "20261101", // Exclusive end for an all-day event.
   invitation: "სიყვარულით გიწვევთ ჩვენი ცხოვრების განსაკუთრებული დღის გასაზიარებლად.",
   venue: "მწვანე სახლი",
-  map: "https://www.google.com/maps?q=HM48+FCH+Green+House,+Makho&ftid=0x40678fae24d67d13:0x445517a1fdc3afa5&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100820247,100822504&g_ep=CAISEjI2LjM2LjMuOTczNTQ4ODUxMBgAINeCAypTLDk0Mjk3Njk5LDk0MjMxMTg4LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDk0Mjg2ODY5LDEwMDgyMDI0NywxMDA4MjI1MDRCAkdF&skid=418f48f9-0374-4117-a0be-108a35918935&g_st=ifm",
+  map: greenHouseMap,
   rsvpForm:
     "https://docs.google.com/forms/d/e/1FAIpQLScd8sSg0ulQC-YJbXPD16B5HAezY71OKfG53RiddU0S7qOESw/viewform",
   hotelMap:
@@ -26,7 +29,7 @@ export const event = {
       note: "მწვანე კონცხი — ბოტანიკური ბაღი (ჩაქვის მხრიდან)",
       map: "https://www.google.com/maps/place/Botanical+Garden+parking/@41.7066494,41.7198399,17z/data=!3m1!4b1!4m6!3m5!1s0x405d7d03eefd0887:0x6e3aba8a464537fc!8m2!3d41.7066494!4d41.7224148!16s%2Fg%2F11qbs5mww1?entry=ttu",
     },
-    { time: "18:00", title: "საზეიმო ვახშამი", note: "მწვანე სახლი" },
+    { time: "18:00", title: "საზეიმო ვახშამი", note: "მწვანე სახლი", map: greenHouseMap },
   ],
 };
 
