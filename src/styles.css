@@ -725,6 +725,10 @@ html {
 .wedding-rsvp-options.is-three {
   grid-template-columns: repeat(3, 1fr);
 }
+.wedding-rsvp-options.is-counts {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .wedding-rsvp-options.is-three button {
   font-size: 0.95rem;
   padding-inline: 8px;
