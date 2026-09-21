@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import coupleFrame from "@/assets/couple-frame-cutout.png.asset.json";
 
 const message = [
   "ძვირფასო სტუმარო,",
@@ -18,10 +17,10 @@ export function LetterEnvelope() {
     <section className={`letter-envelope ${opened ? "is-open" : ""}`} aria-label="წყვილის მიმართვა">
       <motion.img
         className="letter-couple-art"
-        src={coupleFrame.url}
+        src="/media/couple-frame.jpeg"
         alt="პატარძლისა და სიძის ილუსტრაცია"
-        width={970}
-        height={802}
+        width={1320}
+        height={1171}
         loading="lazy"
         decoding="async"
         initial={false}

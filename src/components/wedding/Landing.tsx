@@ -8,7 +8,6 @@ import { LetterEnvelope } from "@/components/wedding/LetterEnvelope";
 import { event, countdown } from "@/lib/event";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import texture from "@/assets/envelope-texture-cream.jpg";
-import ceremonyArt from "@/assets/ceremony-garden.jpg.asset.json";
 
 
 const reveal = {
@@ -144,7 +143,7 @@ export function Landing() {
                 title: "ხელმოწერის ცერემონია",
                 place: "მწვანე კონცხი — ბოტანიკური ბაღი",
                 note: "ჩაქვის მხრიდან",
-                img: ceremonyArt.url,
+                img: "/media/ceremony-garden.jpg",
                 alt: "ხელმოწერის ცერემონიის სივრცის ფერწერული ილუსტრაცია",
                 map: event.ceremonyMap,
               },
